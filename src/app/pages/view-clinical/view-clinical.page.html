@@ -1,9 +1,51 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>view-clinical</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-left">View Clinical Profile</ion-title>
+    <ion-buttons slot="end" >
+      <ion-icon name="close-circle" size="large" (click)="dismissModal()"></ion-icon>
+      <ion-button></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="customPage">
+  <div class="customContent ion-padding">   
+    <br>
 
+    <div class="accordion-card" *ngIf="clinicalProfileList">
+      <ion-card *ngFor="let item of clinicalProfileList;let i = index;">
+        <ion-card-header class="accordion" (click)="toggleAccordian($event, i)">
+          {{item.updated_on * 1000 | date:'medium'}}
+        </ion-card-header>
+        <ion-card-content class="panel" hide="!item.isActive">
+          <ion-list>
+            <ion-item class="ion-text-wrap">Age of onset of disease<h5 slot="end">{{item.age_onset_disease}}</h5></ion-item>
+            <ion-item class="ion-text-wrap">Duration of illness<h5 slot="end">{{item.duration_illness}}</h5></ion-item>
+            <ion-item class="ion-text-wrap">Family history of Type 1 diabetes<h5 slot="end">{{item.family_diabetes_history}}</h5></ion-item>
+            <ion-item class="ion-text-wrap">Associated co-morbidities<h5 slot="end">{{item.associated_co_morbidities}}</h5></ion-item>
+            <ion-item class="ion-text-wrap">Current HbA1C<h5 slot="end">{{item.current_hba}}</h5></ion-item>
+            <ion-item class="ion-text-wrap">Current insulin dose<h5 slot="end">{{item.current_insulin_dose}}</h5></ion-item>
+            <ion-item class="ion-text-wrap">Hospitalization during study period<h5 slot="end">{{item.study_period_hospitalization}}</h5></ion-item>
+            <ion-item class="ion-text-wrap">Reason for hospitalization<h5 slot="end">{{item.study_period_hospitalization_reason}}</h5></ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="!clinicalProfileList">
+      <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 80vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+      </div>
+    </div>
+
+  </div>
 </ion-content>

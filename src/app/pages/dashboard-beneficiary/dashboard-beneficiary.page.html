@@ -16,7 +16,7 @@
   <ion-row>
     <ion-col size="1"></ion-col>
     <ion-col size="4">
-      <ion-img class="thumbnail" [src]="user.userImage"></ion-img>
+      <ion-img class="thumbnail" [src]="user.userImage?user.userImage:'assets/imgs/user.png'"></ion-img>
     </ion-col>
     <ion-col size="6" class="userInfo">
       <ion-label>

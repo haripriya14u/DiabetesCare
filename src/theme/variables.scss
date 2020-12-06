@@ -408,6 +408,8 @@
   z-index: 999;
 }
 
+/***************** CURVED PAGES *******************/
+
 .customPage {
   --ion-background-color: var(--ion-color-primary);
   
@@ -416,11 +418,74 @@
     border-radius: 10px;
     background-color: #ffffff;
   }
+
+  form {
+    ion-item {
+      --background: #ffffff;
+    }
+  }
 }
+
+/***************** CURVED PAGES *******************/
+
+/******************* ACCORDIAN LIST  **********************/
+
+.accordion-card {
+
+  ion-card, ion-list, ion-item {
+    --background: #ffffff;
+  }
+
+  .accordion {
+    background-color: var(--ion-color-primary) !important;
+    color: #fff;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 2ewm;
+    transition: 0.4s;
+  }
+
+  .active, .accordion:hover {
+    background-color: #ccc;
+  }
+
+  .accordion:after {
+    content: '\002B';
+    color: #FFF;
+    font-weight: bold;
+    float: right;
+    font-size: 1.8rem;
+    margin-left: 5px;
+    margin-top: -1.5vh;
+  }
+
+  .active:after {
+    content: "\2212";
+  }
+
+  .panel {
+    width: 100%;
+    padding: 0;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    ion-item {
+      font-size: 1em;
+    }
+  }
+
+}
+
+/******************* ACCORDIAN LIST  **********************/
 
 .thumbnail {
   width: 18vw;
-  margin: 0 auto;
+  margin: 0 auto;  
   ion-label {
     margin-top: 5px;
   }
@@ -443,7 +508,6 @@
 }
 
 .errorMessage {
-	margin-left: 20px !important;
 	color: red !important;
 	font-size: 10px !important;
 }

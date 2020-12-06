@@ -22,7 +22,7 @@
       <form [formGroup]="doctorForm" (ngSubmit)="doctorRegistration()">
 
         <ion-item>
-          <ion-label color="dark" position="floating">Full Name <span class="text-danger">*</span>            
+          <ion-label color="dark" position="floating">Full Name <span color="danger">*</span>            
             <span class="errorMessage" *ngIf="formControlsDoctor.doctor_full_name.invalid && (formControlsDoctor.doctor_full_name.dirty || formControlsDoctor.doctor_full_name.touched)">
               Enter a valid name
             </span>
@@ -34,7 +34,7 @@
 
         <ion-item class="leftPadding">
           <ion-label color="dark" position="floating">Gender 
-            <span class="text-danger">*</span>
+            <span color="danger">*</span>
           </ion-label>
           <ion-select interface="popover" formControlName="doctor_gender" required>
             <ion-select-option value="male">Male</ion-select-option>
@@ -46,7 +46,7 @@
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Phone (+91) <span class="text-danger">*</span>            
+          <ion-label color="dark" position="floating">Phone (+91) <span color="danger">*</span>            
             <span class="errorMessage" *ngIf="formControlsDoctor.doctor_phone.invalid && (formControlsDoctor.doctor_phone.dirty || formControlsDoctor.doctor_phone.touched)">
               Enter a valid phone e.g: 9988774455
             </span>
@@ -57,21 +57,21 @@
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Designation <span class="text-danger">*</span></ion-label>
+          <ion-label color="dark" position="floating">Designation <span color="danger">*</span></ion-label>
           <ion-input type="text" formControlName="doctor_designation" required></ion-input>
         </ion-item>
 
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Hospital <span class="text-danger">*</span></ion-label>
+          <ion-label color="dark" position="floating">Hospital <span color="danger">*</span></ion-label>
           <ion-input type="text" formControlName="doctor_hospital" required></ion-input>
         </ion-item>
 
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Address Line 1 <span class="text-danger">*</span></ion-label>
+          <ion-label color="dark" position="floating">Address Line 1 <span color="danger">*</span></ion-label>
           <ion-input type="text" formControlName="address_line_1" required></ion-input>
         </ion-item>
  
@@ -85,29 +85,29 @@
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">State <span class="text-danger">*</span></ion-label>
+          <ion-label color="dark" position="floating">State <span color="danger">*</span></ion-label>
           <ion-input type="text" formControlName="state_name" required></ion-input>
         </ion-item>
  
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">District <span class="text-danger">*</span></ion-label>
+          <ion-label color="dark" position="floating">District <span color="danger">*</span></ion-label>
           <ion-input type="text" formControlName="district_name" required></ion-input>
         </ion-item>
  
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Country <span class="text-danger">*</span></ion-label>
+          <ion-label color="dark" position="floating">Country <span color="danger">*</span></ion-label>
           <ion-input type="text" formControlName="country" required></ion-input>
         </ion-item>
  
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Username <span class="text-danger">*</span>            
-            <span class="errorMessage" text-wrap *ngIf="formControlsDoctor.doctor_login_id.invalid && (formControlsDoctor.doctor_login_id.dirty || formControlsDoctor.doctor_login_id.touched)">
+          <ion-label color="dark" position="floating">Username <span color="danger">*</span>            
+            <span class="errorMessage"  *ngIf="formControlsDoctor.doctor_login_id.invalid && (formControlsDoctor.doctor_login_id.dirty || formControlsDoctor.doctor_login_id.touched)">
               A unique ID for login. Cannot contain special characters
             </span>
           </ion-label>
@@ -117,8 +117,8 @@
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Password <span class="text-danger">*</span>            
-            <span class="errorMessage" text-wrap *ngIf="formControlsDoctor.doctor_password.invalid && (formControlsDoctor.doctor_password.dirty || formControlsDoctor.doctor_password.touched)">
+          <ion-label color="dark" position="floating">Password <span color="danger">*</span>            
+            <span class="errorMessage"  *ngIf="formControlsDoctor.doctor_password.invalid && (formControlsDoctor.doctor_password.dirty || formControlsDoctor.doctor_password.touched)">
               Minimum 8 characters required.
             </span>
           </ion-label>
@@ -144,19 +144,19 @@
       <form [formGroup]="beneficiaryForm" (ngSubmit)="benefiaryRegistration()">
 
         <ion-item>
-          <ion-label color="dark" position="floating">Full Name <span class="text-danger">*</span>            
-            <span class="errorMessage" *ngIf="formControls.beneficiary_name.invalid && (formControls.beneficiary_name.dirty || formControls.beneficiary_name.touched)">
-              Enter a valid name
-            </span>
+          <ion-label color="dark" position="floating">Full Name <span color="danger">*</span>
           </ion-label>
           <ion-input type="text" formControlName="beneficiary_name" required></ion-input>
-        </ion-item>
+        </ion-item>            
+        <span class="errorMessage" *ngIf="formControls.beneficiary_name.invalid && (formControls.beneficiary_name.dirty || formControls.beneficiary_name.touched)">
+          Enter a valid name
+        </span>
 
         <br>
 
         <ion-item class="leftPadding">
           <ion-label color="dark" position="floating">Gender 
-            <span class="text-danger">*</span>
+            <span color="danger">*</span>
           </ion-label>
           <ion-select interface="popover" formControlName="beneficiary_gender" required>
             <ion-select-option value="male">Male</ion-select-option>
@@ -168,39 +168,39 @@
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Phone (+91) <span class="text-danger">*</span>            
-            <span class="errorMessage" *ngIf="formControls.beneficiary_phone.invalid && (formControls.beneficiary_phone.dirty || formControls.beneficiary_phone.touched)">
-              Enter a valid phone e.g: 9988774455
-            </span>
+          <ion-label color="dark" position="floating">Phone (+91) <span color="danger">*</span>
           </ion-label>
           <ion-input type="number" formControlName="beneficiary_phone" required></ion-input>
-        </ion-item>
+        </ion-item>            
+        <span class="errorMessage" *ngIf="formControls.beneficiary_phone.invalid && (formControls.beneficiary_phone.dirty || formControls.beneficiary_phone.touched)">
+          Enter a valid phone e.g: 9988774455
+        </span>
     
         <br>
 
         <ion-item class="leftPadding">
-          <ion-label color="dark" position="floating">Date of Birth <span class="text-danger">*</span></ion-label>
+          <ion-label color="dark" position="floating">Date of Birth <span color="danger">*</span></ion-label>
           <ion-datetime displayFormat="MM/DD/YYYY" formControlName="beneficiary_dob" required></ion-datetime>
         </ion-item>
 
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Height (Cms) <span class="text-danger">*</span></ion-label>
+          <ion-label color="dark" position="floating">Height (Cms) <span color="danger">*</span></ion-label>
           <ion-input type="number" formControlName="beneficiary_height" required></ion-input>
         </ion-item>
  
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Weight (Kg) <span class="text-danger">*</span></ion-label>
+          <ion-label color="dark" position="floating">Weight (Kg) <span color="danger">*</span></ion-label>
           <ion-input type="number" formControlName="beneficiary_weight" required></ion-input>
         </ion-item>
  
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Address Line 1 <span class="text-danger">*</span></ion-label>
+          <ion-label color="dark" position="floating">Address Line 1 <span color="danger">*</span></ion-label>
           <ion-input type="text" formControlName="address_line_1" required></ion-input>
         </ion-item>
  
@@ -214,46 +214,46 @@
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">State <span class="text-danger">*</span></ion-label>
+          <ion-label color="dark" position="floating">State <span color="danger">*</span></ion-label>
           <ion-input type="text" formControlName="state_name" required></ion-input>
         </ion-item>
  
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">District <span class="text-danger">*</span></ion-label>
+          <ion-label color="dark" position="floating">District <span color="danger">*</span></ion-label>
           <ion-input type="text" formControlName="district_name" required></ion-input>
         </ion-item>
  
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Country <span class="text-danger">*</span></ion-label>
+          <ion-label color="dark" position="floating">Country <span color="danger">*</span></ion-label>
           <ion-input type="text" formControlName="country" required></ion-input>
         </ion-item>
  
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Username <span class="text-danger">*</span>            
-            <span class="errorMessage" text-wrap *ngIf="formControls.beneficiary_login_id.invalid && (formControls.beneficiary_login_id.dirty || formControls.beneficiary_login_id.touched)">
-              A unique ID for login. Cannot contain special characters
-            </span>
+          <ion-label color="dark" position="floating">Username <span color="danger">*</span>
           </ion-label>
           <ion-input type="text" formControlName="beneficiary_login_id" ></ion-input>
-        </ion-item>
+        </ion-item>            
+        <span class="errorMessage"  *ngIf="formControls.beneficiary_login_id.invalid && (formControls.beneficiary_login_id.dirty || formControls.beneficiary_login_id.touched)">
+          A unique ID for login. Cannot contain special characters
+        </span>
 
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Password <span class="text-danger">*</span>            
-            <span class="errorMessage" text-wrap *ngIf="formControls.beneficiary_password.invalid && (formControls.beneficiary_password.dirty || formControls.beneficiary_password.touched)">
-              Minimum 8 characters required.
-            </span>
+          <ion-label color="dark" position="floating">Password <span color="danger">*</span>
           </ion-label>
           <ion-input [type]="showBeneficiaryPasswordText?'text':'password'" formControlName="beneficiary_password" required></ion-input>
           <ion-icon slot="end" class="passwordEye" [name]="showBeneficiaryPasswordText?'eye':'eye-off'" color="primary" item-right (tap)="showBeneficiaryPasswordText = !showBeneficiaryPasswordText"></ion-icon>
-        </ion-item>
+        </ion-item>            
+        <span class="errorMessage"  *ngIf="formControls.beneficiary_password.invalid && (formControls.beneficiary_password.dirty || formControls.beneficiary_password.touched)">
+          Minimum 8 characters required.
+        </span>
 
         <br>
 

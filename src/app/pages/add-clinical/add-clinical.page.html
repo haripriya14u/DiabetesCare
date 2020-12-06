@@ -1,12 +1,143 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Add Clinical Profile</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-left">Add Clinical Profile</ion-title>
+    <ion-buttons slot="end" >
+      <ion-icon name="eye" size="large" (click)="viewClinical()"></ion-icon>
+      <ion-button></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="customPage">
+
+  <div class="customContent ion-padding">  
+    <br>
+
+    <form [formGroup]="clinicalProfileForm" (ngSubmit)="clinicalProfileUpdate()">
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Age of onset of disease <span color="danger">*</span>
+        </ion-label>
+        <ion-input type="text" formControlName="age_onset_disease" required></ion-input>
+      </ion-item>                  
+      <span 
+      class="errorMessage ion-text-wrap"  
+      *ngIf="formControlsClinical.age_onset_disease.invalid && (formControlsClinical.age_onset_disease.dirty || formControlsClinical.age_onset_disease.touched)"
+      >
+        Enter a valid age
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Duration of illness <span color="danger">*</span> 
+        </ion-label>
+        <ion-input type="text" formControlName="duration_illness" required></ion-input>
+      </ion-item>
+      <span 
+      class="errorMessage ion-text-wrap"  
+      *ngIf="formControlsClinical.duration_illness.invalid && (formControlsClinical.duration_illness.dirty || formControlsClinical.duration_illness.touched)"
+      >
+        Enter a valid duration of illness
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Family history of Type 1 diabetes <span color="danger">*</span>
+        </ion-label>
+        <ion-textarea rows="1" cols="1" autoGrow="true" formControlName="family_diabetes_history" required></ion-textarea>
+      </ion-item>            
+      <span 
+      class="errorMessage ion-text-wrap"  
+      *ngIf="formControlsClinical.family_diabetes_history.invalid && (formControlsClinical.family_diabetes_history.dirty || formControlsClinical.family_diabetes_history.touched)"
+      >
+        Enter details of family, who has type 1 diabetes
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Associated co-morbidities <span color="danger">*</span>
+        </ion-label>
+        <ion-input type="text" formControlName="associated_co_morbidities" required></ion-input>
+      </ion-item>                  
+      <span 
+      class="errorMessage ion-text-wrap"  
+      *ngIf="formControlsClinical.associated_co_morbidities.invalid && (formControlsClinical.associated_co_morbidities.dirty || formControlsClinical.associated_co_morbidities.touched)"
+      >
+        Enter details of additional conditons often co-occurring with a primary illness
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Current HbA1C <span color="danger">*</span>  
+        </ion-label>
+        <ion-input type="text" formControlName="current_hba" required></ion-input>
+      </ion-item>                
+      <span 
+      class="errorMessage ion-text-wrap"  
+      *ngIf="formControlsClinical.current_hba.invalid && (formControlsClinical.current_hba.dirty || formControlsClinical.current_hba.touched)"
+      >
+        Enter your current HbA1C
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Current insulin dose <span color="danger">*</span>  
+        </ion-label>
+        <ion-input type="text" formControlName="current_insulin_dose" required></ion-input>
+      </ion-item>          
+      <span 
+      class="errorMessage ion-text-wrap"  
+      *ngIf="formControlsClinical.current_insulin_dose.invalid && (formControlsClinical.current_insulin_dose.dirty || formControlsClinical.current_insulin_dose.touched)"
+      >
+        Enter your current insulin dose
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Hospitalization during study period <span color="danger">*</span>  
+        </ion-label>
+        <ion-input type="text" formControlName="study_period_hospitalization" required></ion-input>
+      </ion-item>          
+      <span 
+      class="errorMessage ion-text-wrap"  
+      *ngIf="formControlsClinical.study_period_hospitalization.invalid && (formControlsClinical.study_period_hospitalization.dirty || formControlsClinical.study_period_hospitalization.touched)"
+      >
+        Enter the details of hospitalization during study period
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Reason for hospitalization <span color="danger">*</span> 
+        </ion-label>
+        <ion-textarea rows="1" cols="1" autoGrow="true" formControlName="study_period_hospitalization_reason" required></ion-textarea>
+      </ion-item>           
+      <span 
+      class="errorMessage ion-text-wrap"  
+      *ngIf="formControlsClinical.study_period_hospitalization_reason.invalid && (formControlsClinical.study_period_hospitalization_reason.dirty || formControlsClinical.study_period_hospitalization_reason.touched)"
+      >
+        Enter the reason of hospitalization during study period
+      </span>
+
+      <br>
+
+      <ion-row center>  
+        <ion-col class="ion-text-center">   
+          <ion-button ion-button type="submit" [disabled]="!clinicalProfileForm.valid" >SUBMIT</ion-button>  
+        </ion-col> 
+      </ion-row>
+
+    </form>
+
+  </div>
 
 </ion-content>
