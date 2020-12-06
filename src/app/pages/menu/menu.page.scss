@@ -1,0 +1,15 @@
+ion-header {
+   min-height: 15vh;
+   background-color: #5058bb;
+   .vertical-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+   }
+ }
+
+ ion-thumbnail {
+    width: 30px !important;
+    height: 30px !important;
+ }

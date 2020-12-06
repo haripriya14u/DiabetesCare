@@ -1,0 +1,81 @@
+<ion-app>
+  <ion-menu content-id="main-content" side="start">
+    <ion-header>
+      <ion-row *ngIf="user" class="vertical-center">
+        <ion-col size="1"></ion-col>
+        <ion-col size="4">
+          <ion-img class="thumbnail" [src]="user.userImage"></ion-img>
+        </ion-col>
+        <ion-col size="6" class="userInfo">
+          <ion-label>
+            <h3>{{user.name}} ({{user.beneficiaryId}})</h3>
+            <p>Doctor: Dr.{{user.doctorAssigned}}</p>
+          </ion-label>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+      </ion-row>
+    </ion-header>
+
+    <ion-content>
+
+      <ion-item-group *ngIf="currentMenu.length>0">     
+        <ion-menu-toggle auto-hide="true">
+          <ng-container *ngFor="let menu of currentMenu">
+            <ion-item [routerLink]="menu.page" routerDirection="root" detail lines="none" [color]="activePath===menu.page?'primary':''">         
+              <ion-thumbnail slot="start">
+                <img [src]="menu.icon">
+              </ion-thumbnail>
+              <ion-label class="ion-text-wrap">{{menu.name}}</ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-menu-toggle>
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Settings</ion-label>
+        </ion-item-divider>      
+        <ion-menu-toggle auto-hide="true">
+          <ion-item routerLink="/menu/welcome" routerDirection="root" detail lines="none" [color]="activePath==='/menu/welcome'?'danger':''">         
+            <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+            <ion-label>About</ion-label>
+          </ion-item>
+          <ion-item detail lines="none">            
+            <ion-icon name="share-social-outline" slot="start"></ion-icon>
+            <ion-label>Share</ion-label>
+          </ion-item>
+          <ion-item detail lines="none">            
+            <ion-icon name="call-outline" slot="start"></ion-icon>
+            <ion-label>Contact Us</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-item>         
+          <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+          <ion-label>Dark Mode</ion-label>
+          <ion-toggle color="light" slot="end" (ionChange)="toggleTheme($event)"></ion-toggle>
+        </ion-item>
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label></ion-label>
+        </ion-item-divider> 
+        <ion-menu-toggle auto-hide="true">
+          <ion-item routerLink="/menu/login" routerDirection="root" detail lines="none" *ngIf="!isLogged" [color]="activePath==='/menu/login'?'danger':''">            
+            <ion-icon name="log-in-outline" slot="start"></ion-icon>
+            <ion-label>Login</ion-label>
+          </ion-item>
+          <ion-item  detail lines="none" *ngIf="isLogged" (click)="logout()">            
+            <ion-icon name="log-out-outline" slot="start"></ion-icon>
+            <ion-label>Logout</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-item-group>
+
+    </ion-content>
+
+  </ion-menu>
+
+  <ion-router-outlet id="main-content" main></ion-router-outlet>
+
+</ion-app>

@@ -1,0 +1,20 @@
+ion-content.background{
+    --background: url('../../../assets/imgs/bg-doctor.jpg') 0 0/100% 50% no-repeat;
+    ion-header {
+        position: sticky;
+        top: 0;
+    }
+    ion-toolbar, ion-item {
+        --background: transparent;
+    }
+}
+
+.routeCards {
+    padding: 10px;
+    text-align: center;
+    ion-img {
+        width: 50%;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+}
