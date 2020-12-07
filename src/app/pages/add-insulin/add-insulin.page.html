@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title class="ion-text-left">Add Insulin</ion-title>
     <ion-buttons slot="end" >
-      <ion-icon name="eye" size="large"></ion-icon>
+      <ion-icon name="eye" size="large" (click)="viewInsulin()"></ion-icon>
       <ion-button></ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -14,5 +14,93 @@
 <ion-content class="customPage">
   <div class="customContent ion-padding">   
     <br>
+    
+    <form [formGroup]="insulinForm" (ngSubmit)="insulinFormUpdate()">
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Date <span class="danger">*</span>
+        </ion-label>
+        <ion-datetime displayFormat="DDD, DD MMM YYYY" formControlName="insulin_date" required></ion-datetime>
+      </ion-item>                  
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsInsulin.insulin_date.invalid && (formControlsInsulin.insulin_date.dirty || formControlsInsulin.insulin_date.touched)"
+      >
+        Enter a valid date
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Time <span class="danger">*</span> 
+        </ion-label>
+        <ion-datetime displayFormat="hh:mm A" formControlName="insulin_time" required></ion-datetime>
+      </ion-item>
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsInsulin.insulin_time.invalid && (formControlsInsulin.insulin_time.dirty || formControlsInsulin.insulin_time.touched)"
+      >
+        Enter a valid time
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Period <span class="danger">*</span>
+        </ion-label>
+        <ion-select formControlName="insulin_range_id" required>
+          <ng-container *ngIf="period.length>0">
+            <ion-select-option *ngFor="let option of period" [value]="option.insulin_range_id">{{option.insulin_period}}</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>            
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsInsulin.insulin_range_id.invalid && (formControlsInsulin.insulin_range_id.dirty || formControlsInsulin.insulin_range_id.touched)"
+      >
+        Select a period
+      </span>
+
+      <br>
+
+      <div formArrayName="insulin_units">
+        <ion-grid inset class="insulin-row" *ngFor="let phone of insulinUnitForms.controls; let i = index" [formGroupName]="i">
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label color="dark" position="floating">Insuline <span class="danger">*</span> </ion-label>
+                <ion-select class="full-width" formControlName="insulin_type_id" required>
+                  <ng-container *ngIf="types.length>0">
+                    <ion-select-option *ngFor="let type of types" [value]="type.insulin_type_id">{{type.insulin_type}}</ion-select-option>
+                  </ng-container>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item> 
+                <ion-label color="dark" position="floating">Units <span class="danger">*</span> </ion-label>
+                <ion-input type="text" formControlName="insulin_unit_value" value="" required></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="2" *ngIf="i>0" >
+              <ion-icon name="remove-circle" color="danger" size="large" (click)="deleteInsulinForm(i)"></ion-icon>
+            </ion-col>
+            <ion-col size="2" *ngIf="i==0" class="ion-margin-vertical">
+              <ion-icon name="add-circle" color="primary" size="large" (click)="addInsulinForm()"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>          
+      </div> 
+
+      <br>
+
+      <ion-row center>  
+        <ion-col class="ion-text-center">   
+          <ion-button ion-button type="submit" [disabled]="!insulinForm.valid" >SUBMIT</ion-button>  
+        </ion-col> 
+      </ion-row>
+
+    </form>
+
   </div>
 </ion-content>

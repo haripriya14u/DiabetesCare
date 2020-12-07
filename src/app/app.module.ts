@@ -5,6 +5,8 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,6 +31,8 @@ import { HttpService } from './services/http.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    OneSignal,
+    CallNumber,
     LoadingService,
     ToastService,
     AlertService,

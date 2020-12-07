@@ -433,6 +433,7 @@
 .accordion-card {
 
   ion-card, ion-list, ion-item {
+    background: #ffffff;
     --background: #ffffff;
   }
 
@@ -507,7 +508,33 @@
   }
 }
 
-.errorMessage {
+.text-danger {
+  color: var(--ion-color-danger);
+}
+
+.errorMessage, .danger {
 	color: red !important;
 	font-size: 10px !important;
+}
+
+.squareBox {
+  width: 50%;
+  margin: 0 auto !important;
+  text-align: center;
+  background: #FFF;
+  ion-input {
+    text-align: center;
+    font-size: 30px;
+  }
+  p {
+    margin: 0px;
+    padding: 16px;
+    background: aliceblue;
+  }
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 99999 !important;
 }

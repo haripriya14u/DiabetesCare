@@ -78,14 +78,22 @@ const routes: Routes = [
       },
       {
         path: 'view-glucose',
-        loadChildren: () => import('../view-dietary/view-dietary.module').then( m => m.ViewDietaryPageModule),
+        loadChildren: () => import('../view-glucose/view-glucose.module').then( m => m.ViewGlucosePageModule),
         canActivate: [AuthGuard]
       },
       {
         path: 'view-insulin',
         loadChildren: () => import('../view-insulin/view-insulin.module').then( m => m.ViewInsulinPageModule),
         canActivate: [AuthGuard]
-      }
+      },
+      {
+        path: 'list-beneficiary',
+        loadChildren: () => import('../list-beneficiary/list-beneficiary.module').then( m => m.ListBeneficiaryPageModule)
+      },
+      {
+        path: 'details-beneficiary',
+        loadChildren: () => import('../details-beneficiary/details-beneficiary.module').then( m => m.DetailsBeneficiaryPageModule)
+      },
     ]
   },
   {

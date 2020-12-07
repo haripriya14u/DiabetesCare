@@ -1,6 +1,6 @@
 ion-header {
    min-height: 15vh;
-   background-color: #5058bb;
+   background-color: var(--ion-color-primary);
    .vertical-center {
       display: flex;
       align-items: center;

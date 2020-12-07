@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 import { LoadingService } from 'src/app/providers/loading.service';
 import { ToastService } from 'src/app/providers/toast.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -25,10 +26,15 @@ export class LoginPage implements OnInit {
     private loading    : LoadingService,
     private toast      : ToastService,
     private authService: AuthenticationService,
-    private router     : Router
+    private router     : Router,
+    private storage    : Storage
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.storage.get('deviceId').then((deviceId) => {
+      this.deviceId = JSON.parse(deviceId);
+    });
+  }
 
   toggleUser(ev: any) {
     this.userType = ev.detail.value;
@@ -39,6 +45,12 @@ export class LoginPage implements OnInit {
 
     let form         = this.loginForm.value;
     form['userType'] = this.userType;
+
+    if(this.deviceId) {
+      form['userId']      = this.deviceId.userId;
+      form['deviceToken'] = this.deviceId.pushToken;
+    }
+
     this.authService.login(form).subscribe(
       async (response) => {
         await this.loading.hide();

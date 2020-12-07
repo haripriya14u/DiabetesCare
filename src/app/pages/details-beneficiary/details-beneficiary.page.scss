@@ -1,0 +1,14 @@
+hr {
+    border-bottom: 1px solid;
+    width: 70%;
+}
+
+ion-segment {
+    --background        : var(--ion-color-primary);
+    ion-segment-button {
+        font-size: 0.8rem;
+        font-weight: 600;
+        --indicator-color   : var(--ion-color-success);
+        --color-checked     : #ffffff;
+    }
+}

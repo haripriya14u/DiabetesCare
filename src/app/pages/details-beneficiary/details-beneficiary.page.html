@@ -1,0 +1,182 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-left">Beneficiary</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="customPage">
+  <div class="customContent ">  
+
+    <ion-grid class="ion-padding ion-no-margin">
+      <ion-row class="ion-no-padding ion-no-margin">
+        <ion-col size="3" class="ion-text-center ion-no-padding ion-margin-vertical">
+          <div [ngStyle]="{'height':'20vw','width':'20vw','border-radius':'50%','background-image': 'url(' + beneficiary.beneficiary_dp_path + ')','background-repeat': 'no-repeat','background-size':'cover'}" ></div>
+        </ion-col>
+        <ion-col size="9" class="ion-text-center ion-no-padding ion-no-margin">
+          <ion-row class="ion-text-center">
+            <ion-col class="ion-text-center ">
+              <h6 class="">{{beneficiary.beneficiary_name}} <small>(#{{beneficiary.beneficiary_id}})</small></h6>            
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size-md="4" class="ion-text-center ion-no-padding ion-no-margin">
+              <small >Gender</small><hr><small>{{beneficiary.beneficiary_gender}}</small>
+            </ion-col>
+            <ion-col size-md="4" class="ion-text-center ion-no-padding ion-no-margin">
+              <small>DOB</small><hr><small>{{beneficiary.beneficiary_dob}}</small>
+            </ion-col>
+            <ion-col size-md="4" class="ion-text-center ion-no-padding ion-no-margin">
+              <small>Height/Weight</small><hr><small>{{beneficiary.beneficiary_height}}/{{beneficiary.beneficiary_weight}}</small>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid class="beneficiary-fab">
+      <ion-row>
+        <ion-col size-md="4" class="ion-margin-horizontal">
+          <ion-fab-button size="small">            
+            <ion-icon name="medkit" size="small"></ion-icon>
+          </ion-fab-button>
+        </ion-col>
+        <ion-col size-md="4" class="ion-margin-horizontal">
+          <ion-fab-button size="small">            
+            <ion-icon name="send" size="small"></ion-icon>
+          </ion-fab-button>
+        </ion-col>
+        <ion-col size-md="4" class="ion-margin-horizontal">
+          <ion-fab-button size="small" (click)="callBeneficiary(beneficiary.beneficiary_phone)">            
+            <ion-icon name="call" size="small"></ion-icon>
+          </ion-fab-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-item color="light" lines="none">
+      <ion-icon name="navigate-circle-outline" color="primary" slot="start"></ion-icon>
+      <ion-text>
+        <p class="ion-text-wrap">
+          {{beneficiary.address_line_1}}{{beneficiary.address_line_2?', '+beneficiary.address_line_2:''}}, {{beneficiary.state_name}}, {{beneficiary.district_name}}, {{beneficiary.country}}
+        </p>
+      </ion-text>
+    </ion-item>
+
+    <ion-segment class="sticky" scrollable="true" [(ngModel)]="pages" (ionChange)="onSegmentChange()">
+      <ng-container *ngFor="let tab of tabList">
+        <ion-segment-button [value]="tab.tabValue">
+          {{tab.tabName}}
+        </ion-segment-button>
+      </ng-container>
+    </ion-segment>
+
+    <div [ngSwitch]="pages">
+
+      <div *ngSwitchCase="'clinicalprofile'">
+        <div class="accordion-card" *ngIf="clinicalProfileList">
+          <ion-card *ngFor="let item of clinicalProfileList;let i = index;">
+            <ion-card-header class="accordion" (click)="toggleAccordian($event, i, clinicalProfileList)">
+              {{item.updated_on * 1000 | date:'medium'}}
+            </ion-card-header>
+            <ion-card-content class="panel" hide="!item.isActive">
+              <ion-list>
+                <ion-item class="ion-text-wrap">Age of onset of disease<h5 slot="end">{{item.age_onset_disease}}</h5></ion-item>
+                <ion-item class="ion-text-wrap">Duration of illness<h5 slot="end">{{item.duration_illness}}</h5></ion-item>
+                <ion-item class="ion-text-wrap">Family history of Type 1 diabetes<h5 slot="end">{{item.family_diabetes_history}}</h5></ion-item>
+                <ion-item class="ion-text-wrap">Associated co-morbidities<h5 slot="end">{{item.associated_co_morbidities}}</h5></ion-item>
+                <ion-item class="ion-text-wrap">Current HbA1C<h5 slot="end">{{item.current_hba}}</h5></ion-item>
+                <ion-item class="ion-text-wrap">Current insulin dose<h5 slot="end">{{item.current_insulin_dose}}</h5></ion-item>
+                <ion-item class="ion-text-wrap">Hospitalization during study period<h5 slot="end">{{item.study_period_hospitalization}}</h5></ion-item>
+                <ion-item class="ion-text-wrap">Reason for hospitalization<h5 slot="end">{{item.study_period_hospitalization_reason}}</h5></ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </div>    
+        <div *ngIf="!clinicalProfileList">
+          <div class="ion-padding custom-skeleton">
+            <ion-skeleton-text animated style="width: 90vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 6vh" slot="start"></ion-skeleton-text><br>
+          </div>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'glucoselog'">
+        <div class="accordion-card" *ngIf="glucoseLogList">
+          <ion-card *ngFor="let item of glucoseLogList;let i = index;">
+            <ion-card-header class="accordion" (click)="toggleAccordian($event, i, glucoseLogList)">
+              {{item.dateTime * 1000 | date:'medium'}}
+            </ion-card-header>
+            <ion-card-content class="panel" hide="!item.isActive">
+              <ion-list *ngIf="item.periods.length>0">
+                <ng-container *ngFor="let period of item.periods[0] | keyvalue">
+                  <ion-item class="ion-text-wrap">
+                    {{period.key}}
+                    <h5 slot="end" [innerHTML]="period.value"></h5>
+                  </ion-item>
+                </ng-container>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </div>    
+        <div *ngIf="!glucoseLogList">
+          <div class="ion-padding custom-skeleton">
+            <ion-skeleton-text animated style="width: 90vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+          </div>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'insulinlog'">
+        <div class="accordion-card" *ngIf="insulinLogList">
+          <ion-card *ngFor="let item of insulinLogList;let i = index;">
+            <ion-card-header class="accordion" (click)="toggleAccordian($event, i, insulinLogList)">
+              {{item.dateTime * 1000 | date:'medium'}}
+            </ion-card-header>
+            <ion-card-content class="panel" hide="!item.isActive">
+              <ion-list *ngIf="item.periods.length>0">
+                <ion-item-group class="ion-text-wrap" *ngFor="let period of item.periods[0] | keyvalue">
+                  <ion-item-divider color="light">{{period.key}}</ion-item-divider>
+                  <ng-container *ngIf="period.value">
+                    <ion-item *ngFor="let periodValue of period.value | keyvalue" lines="none">
+                      {{periodValue.key}}
+                      <h5 slot="end">{{periodValue.value}}</h5>
+                    </ion-item>
+                  </ng-container>
+                </ion-item-group>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </div>    
+        <div *ngIf="!insulinLogList">
+          <div class="ion-padding custom-skeleton">
+            <ion-skeleton-text animated style="width: 90vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+            <ion-skeleton-text animated style="width: 90vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+          </div>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'activitylog'">
+
+      </div>
+
+    </div>
+
+    <br><br>
+
+  </div>
+
+</ion-content>

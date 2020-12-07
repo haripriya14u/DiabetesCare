@@ -1,0 +1,81 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-left">Beneficiaries</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="customPage">
+
+  <div class="customContent ion-padding">  
+    <br>
+
+    <div *ngIf="beneficiaryList">
+      <ion-card *ngFor="let beneficiary of beneficiaryList">
+        <ion-item lines="none" detail (click)="toBeneficiary(beneficiary)">
+          <ion-thumbnail slot="start">
+            <ion-img [src]="beneficiary.beneficiary_dp_path"></ion-img>
+          </ion-thumbnail>
+          <ion-label>
+            <h5>{{beneficiary.beneficiary_name}}</h5>
+            <p>#{{beneficiary.beneficiary_id}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </div>
+
+    <div *ngIf="!beneficiaryList">
+      <div class="ion-padding custom-skeleton">
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h5><ion-skeleton-text animated style="width: 60vw; height: 3vh" slot="start"></ion-skeleton-text></h5>
+            <p><ion-skeleton-text animated style="width: 40vw; height: 2vh" slot="start"></ion-skeleton-text></p>
+          </ion-label>
+        </ion-item> <br>
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h5><ion-skeleton-text animated style="width: 60vw; height: 3vh" slot="start"></ion-skeleton-text></h5>
+            <p><ion-skeleton-text animated style="width: 40vw; height: 2vh" slot="start"></ion-skeleton-text></p>
+          </ion-label>
+        </ion-item> <br>
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h5><ion-skeleton-text animated style="width: 60vw; height: 3vh" slot="start"></ion-skeleton-text></h5>
+            <p><ion-skeleton-text animated style="width: 40vw; height: 2vh" slot="start"></ion-skeleton-text></p>
+          </ion-label>
+        </ion-item> <br>
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h5><ion-skeleton-text animated style="width: 60vw; height: 3vh" slot="start"></ion-skeleton-text></h5>
+            <p><ion-skeleton-text animated style="width: 40vw; height: 2vh" slot="start"></ion-skeleton-text></p>
+          </ion-label>
+        </ion-item> <br>
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h5><ion-skeleton-text animated style="width: 60vw; height: 3vh" slot="start"></ion-skeleton-text></h5>
+            <p><ion-skeleton-text animated style="width: 40vw; height: 2vh" slot="start"></ion-skeleton-text></p>
+          </ion-label>
+        </ion-item> <br>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

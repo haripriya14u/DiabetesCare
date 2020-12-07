@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-dashboard-doctor',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardDoctorPage implements OnInit {
 
-  constructor() { }
+  public user;
+
+  constructor(
+    private router: Router,
+    private auth  : AuthenticationService
+  ) { }
 
   ngOnInit() {
+    this.user = this.auth.getUser().then((data) => {    
+      this.user = data;  
+    });
+  }
+
+  toPage(page: string) {
+    this.router.navigateByUrl(page, {replaceUrl: true});
   }
 
 }
