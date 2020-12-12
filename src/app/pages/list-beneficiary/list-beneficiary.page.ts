@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Platform } from '@ionic/angular';
 import { ToastService } from 'src/app/providers/toast.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HttpService } from 'src/app/services/http.service';
@@ -18,8 +20,16 @@ export class ListBeneficiaryPage implements OnInit {
     private authService: AuthenticationService,
     private toast      : ToastService,
     private http       : HttpService,
-    private router     : Router
-  ) { }
+    private router     : Router,
+    private platform   : Platform,
+    private statusBar  : StatusBar
+  ) {
+    this.platform.ready().then(() => {
+      this.statusBar.overlaysWebView(false);
+      this.statusBar.backgroundColorByHexString('#6ab2fc');
+      this.statusBar.styleLightContent();
+    });
+  }
 
   ngOnInit() {
     this.user = this.authService.getUser().then((data) => {    

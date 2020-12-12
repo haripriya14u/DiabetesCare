@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { ModalController, Platform } from '@ionic/angular';
 import { AlertService } from 'src/app/providers/alert.service';
 import { LoadingService } from 'src/app/providers/loading.service';
 import { ToastService } from 'src/app/providers/toast.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HttpService } from 'src/app/services/http.service';
+import { SuggestionInsulinPage } from '../suggestion-insulin/suggestion-insulin.page';
 import { ViewInsulinPage } from '../view-insulin/view-insulin.page';
 
 @Component({
@@ -17,8 +19,9 @@ export class AddInsulinPage implements OnInit {
 
   public user;
 
-  period = [];
-  types  = [];
+  period      = [];
+  types       = [];
+  suggestions = [];
 
   public date      = new Date();
   myDate: String   = this.date.toISOString();
@@ -38,8 +41,16 @@ export class AddInsulinPage implements OnInit {
     private alert      : AlertService,
     private http       : HttpService,
     public  modal      : ModalController,
-    public  form       : FormBuilder
-  ) { }
+    public  form       : FormBuilder,
+    private platform   : Platform,
+    private statusBar  : StatusBar
+  ) {
+    this.platform.ready().then(() => {
+      this.statusBar.overlaysWebView(false);
+      this.statusBar.backgroundColorByHexString('#6ab2fc');
+      this.statusBar.styleLightContent();
+    });
+  }
 
   ngOnInit() {
     this.user = this.authService.getUser().then((data) => {    
@@ -55,7 +66,7 @@ export class AddInsulinPage implements OnInit {
   addInsulinForm() {
     const insulinValueForm = new FormGroup({
       insulin_type_id   : new FormControl('', Validators.required),
-      insulin_unit_value: new FormControl(1, Validators.required),
+      insulin_unit_value: new FormControl('', [Validators.required,Validators.min(1)]),
     });
     this.insulinUnitForms.push(insulinValueForm);
   }
@@ -91,22 +102,49 @@ export class AddInsulinPage implements OnInit {
     let  data         = [];
     data['token']     = this.user.token;
 
-    this.loading.show();
-    this.http.getInsulinTypes(data).subscribe(async (response) => {
-      await this.loading.hide();
+    this.http.getInsulinTypes(data).subscribe((response) => {
       if(response['status'] == 200) {         
-        this.types = response['data'];
+        this.types = response['data'];        
+        this.getAccepetedSuggestions();
       } else if(response['status'] == 202) {
         this.toast.errorToast(response['message']);
       } else {
         this.toast.errorToast('Failed!, please try again later')
       }
-    },async (error) => {
-        await this.loading.hide();   
+    },async (error) => {  
         this.toast.errorToast('Failed, Please try again later');      
       }
     );
     this.addInsulinForm();
+  }
+
+  getAccepetedSuggestions() {
+    let  data         = [];
+    data['token']     = this.user.token;
+
+    this.loading.show();
+    this.http.getAccepetedSuggestions(data).subscribe(async (response) => {
+      await this.loading.hide();
+      if(response['status'] == 200) {         
+        this.suggestions = response['data'];
+      }
+    },async (error) => {
+        await this.loading.hide();      
+      }
+    );
+  }
+
+  async showSuggestions() {
+    let modalData = {
+      suggestions: this.suggestions,
+    };
+    
+    const modal = await this.modal.create({
+      component: SuggestionInsulinPage, 
+      cssClass: 'customModal',
+      componentProps: modalData
+    });
+    return await modal.present();
   }
     
   insulinFormUpdate() {

@@ -94,6 +94,14 @@ const routes: Routes = [
         path: 'details-beneficiary',
         loadChildren: () => import('../details-beneficiary/details-beneficiary.module').then( m => m.DetailsBeneficiaryPageModule)
       },
+      {
+        path: 'suggestion-insulin',
+        loadChildren: () => import('../suggestion-insulin/suggestion-insulin.module').then( m => m.SuggestionInsulinPageModule)
+      },
+      {
+        path: 'insulin-form',
+        loadChildren: () => import('../insulin-form/insulin-form.module').then( m => m.InsulinFormPageModule)
+      }
     ]
   },
   {

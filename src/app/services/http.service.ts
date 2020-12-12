@@ -108,6 +108,13 @@ export class HttpService {
     });
   }
 
+  getAccepetedSuggestions(arrays: any) {
+    let body = this.jsonToURLEncoded(arrays);
+    return this._http.post(`${this.url}getAccepetedSuggestions`, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
+    });
+  }
+
   addInsulinLog(arrays: any) {
     let body = this.jsonToURLEncoded(arrays);
     return this._http.post(`${this.url}addInsulinLog`, body, {
@@ -118,6 +125,20 @@ export class HttpService {
   getInsulinLog(arrays: any) {
     let body = this.jsonToURLEncoded(arrays);
     return this._http.post(`${this.url}getInsulinLog`, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
+    });
+  }
+
+  getInsulinSuggestions(arrays: any) {
+    let body = this.jsonToURLEncoded(arrays);
+    return this._http.post(`${this.url}getInsulinSuggestions`, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
+    });
+  }
+
+  updateInsulinSuggestions(arrays: any) {
+    let body = this.jsonToURLEncoded(arrays);
+    return this._http.post(`${this.url}updateInsulinSuggestions`, body, {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
     });
   }

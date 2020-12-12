@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AlertController, Platform } from '@ionic/angular';
 import { AlertService } from 'src/app/providers/alert.service';
 import { LoadingService } from 'src/app/providers/loading.service';
 import { ToastService } from 'src/app/providers/toast.service';
@@ -52,11 +53,19 @@ export class SignupPage implements OnInit {
 
   constructor(
     private alertCtrl: AlertController,
-    private loading: LoadingService,
-    private toast: ToastService,
-    private alert: AlertService,
-    private http: HttpService
-  ) { }
+    private loading  : LoadingService,
+    private toast    : ToastService,
+    private alert    : AlertService,
+    private http     : HttpService,
+    private platform : Platform,
+    private statusBar: StatusBar
+  ) {
+    this.platform.ready().then(() => {
+      this.statusBar.overlaysWebView(false);
+      this.statusBar.backgroundColorByHexString('#6ab2fc');
+      this.statusBar.styleLightContent();
+    });
+  }
 
   ngOnInit() {
     this.showForm();

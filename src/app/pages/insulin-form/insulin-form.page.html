@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-left ion-text-wrap">Insulin suggestion</ion-title>
+    <ion-buttons slot="end" >
+      <ion-icon name="close-circle" size="large" (click)="dismissModal()"></ion-icon>
+      <ion-button></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="customPage">
+  <div class="customContent ion-padding">   
+
+    
+    <ion-text color="primary">        
+      <h4 class="ion-text-center">{{beneficiary.beneficiary_name}} (#{{beneficiary.beneficiary_id}})</h4>
+    </ion-text>
+    <ion-text color="primary">        
+      <h6 class="ion-text-center">{{suggestionDate}}</h6>
+    </ion-text>  
+
+    <br>
+
+    <form *ngIf="insulinSuggestions.length>0" #suggestionForm="ngForm" (ngSubmit)="logForm(suggestionForm.value)">
+    
+      <ng-container *ngFor="let suggestion of insulinSuggestions">
+
+        <ion-item>
+          <ion-label color="dark" position="fixed">{{suggestion.insulin_period}} <span class="danger">*</span></ion-label>
+          <ion-input type="text" inputmode="tel" class="ion-text-center" name="{{suggestion.insulin_range_id}}" [(ngModel)]="suggestion.suggestion_unit" required></ion-input>
+        </ion-item>      
+
+        <br><br>
+
+      </ng-container>
+
+      <ion-row center *ngIf="suggestionStatus==='SUGGESTED'">  
+        <ion-col class="ion-text-center">   
+          <ion-button ion-button color="danger" (click)="logForm('','REJECTED')">IGNORE</ion-button>  
+        </ion-col>
+        <ion-col class="ion-text-center">   
+          <ion-button ion-button type="submit"[disabled]="!suggestionForm.form.valid" >SUBMIT</ion-button>  
+        </ion-col> 
+      </ion-row>
+
+    </form>
+
+
+  </div>
+
+</ion-content>

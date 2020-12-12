@@ -4,6 +4,10 @@
       <ion-back-button text=""></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-left">Beneficiary</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon slot="end" name="notifications" color="danger" *ngIf="showSuggestion && beneficiary.insulin_suggestion>0" (click)="suggestionForm()"></ion-icon>
+      <ion-button></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

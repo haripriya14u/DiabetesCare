@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { LoadingService } from 'src/app/providers/loading.service';
 import { ToastService } from 'src/app/providers/toast.service';
@@ -27,8 +29,16 @@ export class LoginPage implements OnInit {
     private toast      : ToastService,
     private authService: AuthenticationService,
     private router     : Router,
-    private storage    : Storage
-  ) { }
+    private storage    : Storage,
+    private platform   : Platform,
+    private statusBar  : StatusBar,
+  ) {
+    this.platform.ready().then(() => {
+      this.statusBar.overlaysWebView(false);
+      this.statusBar.backgroundColorByHexString('#ffffff');
+      this.statusBar.styleDefault();
+    });
+  }
 
   ngOnInit() {
     this.storage.get('deviceId').then((deviceId) => {

@@ -1,55 +1,59 @@
 <ion-content>
 
-  <ion-grid fixed>
-    <ion-row>
-      <ion-col>
-        <ion-img class="logo" src="assets/imgs/logo.png"></ion-img>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="vertical-center">
 
-  <form class="ion-padding" [formGroup]="loginForm" (ngSubmit)="login()">
-    <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-segment (ionChange)="toggleUser($event)" color="success" [value]="userType">
-            <ion-segment-button value="beneficiary">
-              <ion-label>Beneficiary</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="doctor">
-              <ion-label>Doctor</ion-label>
-            </ion-segment-button>
-          </ion-segment>
-        </ion-list>
-        <ion-list>
-          <ion-item>
-            <ion-label color="primary" position="fixed">Username</ion-label>
-            <ion-input type="text" formControlName="username" required></ion-input>
-          </ion-item>
-        </ion-list>
-        <ion-list>
-          <ion-item >
-            <ion-label color="primary" position="fixed">Password</ion-label>
-            <ion-input [type]="showPasswordText?'text':'password'" formControlName="password" required></ion-input>
-            <ion-icon class="passwordEye" slot="end" [name]="showPasswordText?'eye':'eye-off'" color="primary" (click)="showPasswordText = !showPasswordText"></ion-icon>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-    <br>
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <ion-button type="submit" color="primary" [disabled]="!loginForm.valid">Login</ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col>
+          <ion-img class="logo" src="assets/imgs/logo.png"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-  <ion-row >
-    <ion-col>
-      <p class="ion-text-center"> Don't have an account? 
-        <span class="font-weight" (click)="toSignUp()"> Sign Up </span>
-      </p>
-    </ion-col>
-  </ion-row>
+    <form class="ion-padding" [formGroup]="loginForm" (ngSubmit)="login()">
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-segment (ionChange)="toggleUser($event)" color="success" [value]="userType">
+              <ion-segment-button value="beneficiary">
+                <ion-label>Beneficiary</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="doctor">
+                <ion-label>Doctor</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-label color="primary" position="fixed">Username</ion-label>
+              <ion-input type="text" formControlName="username" required></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+            <ion-item >
+              <ion-label color="primary" position="fixed">Password</ion-label>
+              <ion-input [type]="showPasswordText?'text':'password'" formControlName="password" required></ion-input>
+              <ion-icon class="passwordEye" slot="end" [name]="showPasswordText?'eye':'eye-off'" color="primary" (click)="showPasswordText = !showPasswordText"></ion-icon>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <br>
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-button type="submit" color="primary" [disabled]="!loginForm.valid">Login</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <ion-row >
+      <ion-col>
+        <p class="ion-text-center"> Don't have an account? 
+          <span class="font-weight" (click)="toSignUp()"> Sign Up </span>
+        </p>
+      </ion-col>
+    </ion-row>
+
+  </div>
 
 </ion-content>

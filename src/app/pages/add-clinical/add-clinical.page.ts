@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { ModalController, Platform } from '@ionic/angular';
 import { AlertService } from 'src/app/providers/alert.service';
 import { LoadingService } from 'src/app/providers/loading.service';
 import { ToastService } from 'src/app/providers/toast.service';
@@ -34,8 +35,16 @@ export class AddClinicalPage implements OnInit {
     private toast      : ToastService,
     private alert      : AlertService,
     private http       : HttpService,
-    public  modal      : ModalController
-  ) { }
+    public  modal      : ModalController,
+    private platform   : Platform,
+    private statusBar  : StatusBar
+  ) {
+    this.platform.ready().then(() => {
+      this.statusBar.overlaysWebView(false);
+      this.statusBar.backgroundColorByHexString('#6ab2fc');
+      this.statusBar.styleLightContent();
+    });
+  }
 
   ngOnInit() {
     this.user = this.authService.getUser().then((data) => {    

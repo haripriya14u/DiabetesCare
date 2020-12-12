@@ -1,0 +1,31 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-left ion-text-wrap">Insulin suggestion</ion-title>
+    <ion-buttons slot="end" >
+      <ion-icon name="close-circle" size="large" (click)="dismissModal()"></ion-icon>
+      <ion-button></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="customPage">
+  <div class="customContent ion-padding">
+
+    <ion-text class="ion-text-center" color="primary">
+      <h6>{{suggestions[0].suggestion_date}}</h6>
+    </ion-text>
+
+    <ion-card lines="none" *ngIf="suggestions.length>0">
+      <ion-item *ngFor="let suggestion of suggestions">
+        <ion-label>
+          {{suggestion.insulin_period}}
+        </ion-label>
+        <ion-text color="primary" slot="end">{{suggestion.suggestion_unit}}</ion-text>
+      </ion-item>      
+    </ion-card>
+
+  </div>
+</ion-content>

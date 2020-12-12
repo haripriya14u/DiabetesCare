@@ -538,3 +538,22 @@
   top: 0;
   z-index: 99999 !important;
 }
+
+.vertical-center {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/***************** CUSTOM MODAL ******************/
+.customModal {
+  --max-height: 50%;
+  --border-radius: 15px;
+  .modal-wrapper {
+    position: absolute;
+    bottom: 0;
+  }  
+}
+/***************** CUSTOM MODAL ******************/

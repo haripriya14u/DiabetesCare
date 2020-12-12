@@ -2,11 +2,12 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
+      <ion-title class="ion-text-left">Add Insulin</ion-title>
     </ion-buttons>
-    <ion-title class="ion-text-left">Add Insulin</ion-title>
-    <ion-buttons slot="end" >
-      <ion-icon name="eye" size="large" (click)="viewInsulin()"></ion-icon>
-      <ion-button></ion-button>
+    <ion-buttons slot="end" >            
+      <ion-icon class="ion-margin-end" name="alert-circle" size="large" (click)="showSuggestions()" *ngIf="suggestions.length>0"></ion-icon>
+      <ion-icon class="ion-margin-end" name="eye" size="large" (click)="viewInsulin()"></ion-icon>
+      <ion-icon routerLink="/menu/dashboard-beneficiary" routerDirection="root" class="ion-margin-end" name="home" size="large"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -79,7 +80,7 @@
             <ion-col size="4">
               <ion-item> 
                 <ion-label color="dark" position="floating">Units <span class="danger">*</span> </ion-label>
-                <ion-input type="text" formControlName="insulin_unit_value" value="" required></ion-input>
+                <ion-input type="number" formControlName="insulin_unit_value" value="" required></ion-input>
               </ion-item>
             </ion-col>
             <ion-col size="2" *ngIf="i>0" >

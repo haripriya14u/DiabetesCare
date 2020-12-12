@@ -5,6 +5,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HttpService } from 'src/app/services/http.service';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { Storage } from '@ionic/storage';
+import { ModalController, Platform } from '@ionic/angular';
+import { InsulinFormPage } from '../insulin-form/insulin-form.page';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-details-beneficiary',
@@ -13,6 +16,7 @@ import { Storage } from '@ionic/storage';
 })
 export class DetailsBeneficiaryPage implements OnInit {
 
+  public showSuggestion : boolean = true;
   public user;
   public beneficiary;
   public pages = 'clinicalprofile';
@@ -33,8 +37,16 @@ export class DetailsBeneficiaryPage implements OnInit {
     private http          : HttpService,
     private authService   : AuthenticationService,
     private callNumber    : CallNumber,
-    private storage       : Storage
-  ) {    
+    private storage       : Storage,
+    private modal         : ModalController,
+    private platform      : Platform,
+    private statusBar     : StatusBar
+  ) {
+    this.platform.ready().then(() => {
+      this.statusBar.overlaysWebView(false);
+      this.statusBar.backgroundColorByHexString('#6ab2fc');
+      this.statusBar.styleLightContent();
+    });
     this.activatedRoute.queryParams.subscribe((beneficiary)=>{
       this.beneficiary = beneficiary;
     });
@@ -44,6 +56,25 @@ export class DetailsBeneficiaryPage implements OnInit {
     await this.storage.get('user').then(res => {
       this.user = JSON.parse(res);
     });
+  }
+
+  async suggestionForm() {
+    let modalData = {
+      beneficiary: this.beneficiary,
+      user: this.user,
+    };
+    
+    const modal = await this.modal.create({
+      component: InsulinFormPage, 
+      componentProps: modalData
+    });
+
+    modal.onDidDismiss()
+      .then((data) => {
+        this.showSuggestion = data['showIcon']; 
+    });
+
+    return await modal.present();
   }
 
   ionViewDidEnter() {    

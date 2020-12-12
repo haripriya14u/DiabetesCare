@@ -3,7 +3,6 @@ import { Platform, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
-import { Location } from '@angular/common';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -25,7 +24,6 @@ export class AppComponent {
     private storage        : Storage,
     private statusBar      : StatusBar,
     private oneSignal      : OneSignal,
-    private location       : Location,
     public  toast          : ToastController
   ) {
     this.initializeApp();
@@ -36,6 +34,7 @@ export class AppComponent {
       
       this.statusBar.overlaysWebView(false);
       this.statusBar.backgroundColorByHexString('#6ab2fc');
+      this.statusBar.styleLightContent();
       this.splashScreen.hide();
 
       //ONE SIGNAL CONFIG
@@ -55,7 +54,6 @@ export class AppComponent {
       //EXIT APP
       this.platform.backButton.subscribe(() => {  
         const path = window.location.pathname;
-        console.log(this.safePaths.lastIndexOf(path));
         if(this.safePaths.lastIndexOf(path)<0) {
           this.showExitConfirm(); 
         }  
