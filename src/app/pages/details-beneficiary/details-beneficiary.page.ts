@@ -24,11 +24,13 @@ export class DetailsBeneficiaryPage implements OnInit {
   public glucoseLogList;
   public insulinLogList;
   public activityLogList;
+  public dietaryLogList;
   public tabList = [
     { 'tabName':'Clinical Profile', 'tabValue':'clinicalprofile' },
     { 'tabName':'Glucose Log', 'tabValue':'glucoselog' },
     { 'tabName':'Insulin Log', 'tabValue':'insulinlog' },
-    { 'tabName':'Activity Log', 'tabValue':'activitylog' },    
+    { 'tabName':'Activity Log', 'tabValue':'activitylog' },
+    { 'tabName':'Dietary Log', 'tabValue':'dietarylog' },    
   ];
 
   constructor(
@@ -104,7 +106,11 @@ export class DetailsBeneficiaryPage implements OnInit {
         this.getInsulinLogData();
         break;
       case 'activitylog':
-          break;
+        this.getActivityLogData();
+        break;
+      case 'dietarylog':
+        this.getDietaryLogData();
+        break;
     }
   }
 
@@ -170,6 +176,47 @@ export class DetailsBeneficiaryPage implements OnInit {
         this.toast.errorToast('Failed, please try again later');     
       }
     )
+  }
+
+  getActivityLogData() {
+    let  data     = [];
+    data['token'] = this.user.token;
+    data['beneficiary_registration_id'] = this.beneficiary.beneficiary_registration_id;
+
+    this.http.getactivityLog(data).subscribe((response) => {
+      if(response['status'] == 200) { 
+        let data = response['data'];
+        if(data.length>0) {
+          this.activityLogList = data;
+        } else {
+          this.activityLogList = [];
+        }
+      } 
+    },(error) => {
+        this.activityLogList = [];
+        this.toast.errorToast('Failed, Please try again later');
+      }
+    );
+  }
+
+  getDietaryLogData() {
+    let  data     = [];
+    data['token'] = this.user.token;
+    data['beneficiary_registration_id'] = this.beneficiary.beneficiary_registration_id;
+    this.http.getDietaryLog(data).subscribe((response) => {
+      if(response['status'] == 200) { 
+        let data = response['data'];
+        if(data.length>0) {
+          this.dietaryLogList = data.slice().reverse();
+        } else {
+          this.dietaryLogList = [];
+        }
+      } 
+    },(error) => {
+        this.dietaryLogList = [];
+        this.toast.errorToast('Failed, Please try again later');
+      }
+    );
   }
 
   //ACCORDIAN

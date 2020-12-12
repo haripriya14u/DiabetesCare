@@ -176,6 +176,49 @@ export class HttpService {
     });
   }
 
+  addActivityLog(arrays: any) {
+    let body = this.jsonToURLEncoded(arrays);
+    return this._http.post(`${this.url}addActivityLog`, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
+    });
+  }
+  
+  getactivityLog(arrays: any) {
+    let body = this.jsonToURLEncoded(arrays);
+    return this._http.post(`${this.url}getactivityLog`, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
+    });
+  }
+
+  getDietaryRange(arrays: any) {
+    let body = this.jsonToURLEncoded(arrays);
+    return this._http.post(`${this.url}getDietaryRange`, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
+    });
+  }
+
+  getDietaryItems(arrays: any) {
+    let body = this.jsonToURLEncoded(arrays);
+    return this._http.post(`${this.url}getDietaryItems`, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
+    });
+  }
+
+  addDietaryLog(arrays: any) {
+    let body = this.jsonToURLEncoded(arrays);
+    return this._http.post(`${this.url}addDietaryLog`, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
+    });
+  }
+
+  getDietaryLog(arrays: any) {
+    let body = this.jsonToURLEncoded(arrays);
+    return this._http.post(`${this.url}getDietaryLog`, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
+    });
+  }
+
+
   //convert a json object to the url encoded format of key=value&anotherkye=anothervalue
   private jsonToURLEncoded(jsonString) {
     return Object.keys(jsonString).map(function (key) {

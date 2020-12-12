@@ -24,8 +24,8 @@ export class AddInsulinPage implements OnInit {
   suggestions = [];
 
   public date      = new Date();
-  myDate: String   = this.date.toISOString();
-  myTime: String   = new Date(this.date.getTime() - (this.date.getTimezoneOffset() * 60000)).toISOString();
+  myDate: String   = this.date.toLocaleString();
+  myTime: String   = new Date(this.date.getTime() - (this.date.getTimezoneOffset() * 60000)).toLocaleString();
 
   insulinForm = new FormGroup({
     insulin_date    : new FormControl(this.myDate, Validators.required),

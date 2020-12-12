@@ -2,11 +2,11 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
-      <ion-title class="ion-text-left">Add Dietary</ion-title>
     </ion-buttons>
+    <ion-title class="ion-text-left">Add Dietary</ion-title>
     <ion-buttons slot="end" >
-      <ion-icon class="ion-margin-end" name="eye" size="large"></ion-icon>
-      <ion-icon routerLink="/menu/dashboard-beneficiary" routerDirection="root" class="ion-margin-end" name="home" size="large"></ion-icon>
+      <ion-icon class="ion-margin-end nav-icon" name="eye" (click)="viewDietary()"></ion-icon>
+      <ion-icon routerLink="/menu/dashboard-beneficiary" routerDirection="root" class="ion-margin-end nav-icon" name="home" ></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -14,5 +14,85 @@
 <ion-content class="customPage">
   <div class="customContent ion-padding">   
     <br>
+
+    <form [formGroup]="dietaryForm" (ngSubmit)="dietaryFormUpdate()">
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Date <span class="danger">*</span>
+        </ion-label>
+        <ion-datetime displayFormat="DDD, DD MMM YYYY" formControlName="dietary_date" required></ion-datetime>
+      </ion-item>                  
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsDietary.dietary_date.invalid && (formControlsDietary.dietary_date.dirty || formControlsDietary.dietary_date.touched)"
+      >
+        Enter a valid date
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Time <span class="danger">*</span> 
+        </ion-label>
+        <ion-datetime displayFormat="hh:mm A" formControlName="dietary_time" required></ion-datetime>
+      </ion-item>
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsDietary.dietary_time.invalid && (formControlsDietary.dietary_time.dirty || formControlsDietary.dietary_time.touched)"
+      >
+        Enter a valid time
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Period <span class="danger">*</span>
+        </ion-label>
+        <ion-select formControlName="dietary_range_id" required>
+          <ng-container *ngIf="period.length>0">
+            <ion-select-option *ngFor="let option of period" [value]="option.dietary_range_id">{{option.dietary_period}}</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>            
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsDietary.dietary_range_id.invalid && (formControlsDietary.dietary_range_id.dirty || formControlsDietary.dietary_range_id.touched)"
+      >
+        Select a period
+      </span>
+
+      <br>
+
+      <ion-row center>  
+        <ion-col class="ion-text-center">   
+          <ion-button ion-button (click)="searchDietary()" color="tertiary">Add Dietary Items</ion-button>  
+        </ion-col> 
+      </ion-row>
+
+      <br>
+
+      <div *ngIf="addedItems.length>0">
+        <ion-list>
+          <ion-item *ngFor="let item of addedItems">
+            <ion-avatar slot="start">
+              <ion-img [src]="item.food_item_image_path"></ion-img>
+            </ion-avatar>
+            <ion-label class="ion-text-wrap">
+              <h3>{{item.food_item}}</h3>
+              <p>{{item.dietary_quantity | number}} {{item.food_item_measure_type | lowercase}} : {{item.food_item_carb_count*item.dietary_quantity}} Carb / {{item.food_item_carbohydrate*item.dietary_quantity}} Carbohydrate</p>
+            </ion-label>
+            <ion-icon (click)="removeAddedItems(item)" class="nav-icon" color="danger" slot="end" name="remove-circle"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <ion-row center>  
+        <ion-col class="ion-text-center">   
+          <ion-button ion-button type="submit" [disabled]="!dietaryForm.valid" >SUBMIT</ion-button>  
+        </ion-col> 
+      </ion-row>
+
+    </form>
+
   </div>
 </ion-content>

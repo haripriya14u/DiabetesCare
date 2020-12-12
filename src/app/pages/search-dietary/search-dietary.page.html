@@ -1,0 +1,37 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-left">Search Diet Items</ion-title>
+    <ion-buttons slot="end" >
+      <ion-icon name="close-circle" size="large" (click)="dismissModal()"></ion-icon>
+      <ion-button></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="customPage">
+  <div class="customContent ion-padding">   
+    <ion-searchbar color="light" class="sticky" debounce="1000" placeholder="search food . ." [(ngModel)]="keyword" (ionChange)="getdietItemsData()"></ion-searchbar>
+    <br>   
+    
+    <div *ngIf="dietItemsList">
+      <ion-card class="animate__animated animate__fadeInDown" *ngFor="let item of dietItemsList">
+        <ion-item lines="none" (click)="addDietItems(item)">
+          <ion-thumbnail slot="start">
+            <ion-img [src]="item.food_item_image_path"></ion-img>
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap">
+            <h3>{{item.food_item}}</h3>
+            <p>{{item.food_item_measure_value | number}} {{item.food_item_measure_type | lowercase}} : {{item.food_item_carb_count}} Carb / {{item.food_item_carbohydrate}} Carbohydrate</p>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </div>
+    
+  </div>
+</ion-content>
+<ion-footer>  
+  <ion-progress-bar [type]="'indeterminate'" *ngIf="showProgress"></ion-progress-bar>
+</ion-footer>

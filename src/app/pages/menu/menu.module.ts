@@ -101,6 +101,10 @@ const routes: Routes = [
       {
         path: 'insulin-form',
         loadChildren: () => import('../insulin-form/insulin-form.module').then( m => m.InsulinFormPageModule)
+      },
+      {
+        path: 'search-dietary',
+        loadChildren: () => import('../search-dietary/search-dietary.module').then( m => m.SearchDietaryPageModule)
       }
     ]
   },

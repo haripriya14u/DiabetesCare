@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title class="ion-text-left">View Dietary</ion-title>
     <ion-buttons slot="end" >
-      <ion-icon name="eye" size="large"></ion-icon>
+      <ion-icon name="close-circle" size="large" (click)="dismissModal()"></ion-icon>
       <ion-button></ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -14,5 +14,38 @@
 <ion-content class="customPage">
   <div class="customContent ion-padding">   
     <br>
+    
+    <div class="accordion-card" *ngIf="dietaryLogList">
+      <ion-card *ngFor="let item of dietaryLogList;let i = index;">
+        <ion-card-header class="accordion" (click)="toggleAccordian($event, i)">
+          {{item.dateTime * 1000 | date:'medium'}}
+        </ion-card-header>
+        <ion-card-content class="panel" hide="!item.isActive">
+          <ion-list *ngIf="item.periods.length>0">
+            <ion-item-group class="ion-text-wrap" *ngFor="let period of item.periods[0] | keyvalue">
+              <ion-item-divider color="light">{{period.key}}</ion-item-divider>
+              <!-- <span [innerHTML]="period.value"></span> -->
+              <ng-container *ngIf="period.value">
+                <ion-item *ngFor="let periodValue of period.value | keyvalue" lines="none">
+                  {{periodValue.key}}
+                  <h5 slot="end">{{periodValue.value}}</h5>
+                </ion-item>
+              </ng-container>
+            </ion-item-group>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="!dietaryLogList">
+      <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+      </div>
+    </div>
+
   </div>
 </ion-content>

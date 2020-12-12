@@ -5,8 +5,8 @@
     </ion-buttons>
     <ion-title class="ion-text-left">Add Activity</ion-title>
     <ion-buttons slot="end" >
-      <ion-icon class="ion-margin-end" name="eye" size="large"></ion-icon>
-      <ion-icon routerLink="/menu/dashboard-beneficiary" routerDirection="root" class="ion-margin-end" name="home" size="large"></ion-icon>
+      <ion-icon class="ion-margin-end nav-icon" name="eye" (click)="viewActivity()"></ion-icon>
+      <ion-icon routerLink="/menu/dashboard-beneficiary" routerDirection="root" class="ion-margin-end nav-icon" name="home" ></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -14,5 +14,140 @@
 <ion-content class="customPage">
   <div class="customContent ion-padding">   
     <br>
+
+    <form [formGroup]="activityForm" (ngSubmit)="activityFormUpdate()">
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Date <span class="danger">*</span>
+        </ion-label>
+        <ion-datetime displayFormat="DDD, DD MMM YYYY" formControlName="activity_date" required></ion-datetime>
+      </ion-item>                  
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsActivity.activity_date.invalid && (formControlsActivity.activity_date.dirty || formControlsActivity.activity_date.touched)"
+      >
+        Enter a valid date
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Time <span class="danger">*</span> 
+        </ion-label>
+        <ion-datetime displayFormat="hh:mm A" formControlName="activity_time" required></ion-datetime>
+      </ion-item>
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsActivity.activity_time.invalid && (formControlsActivity.activity_time.dirty || formControlsActivity.activity_time.touched)"
+      >
+        Enter a valid time
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Period <span class="danger">*</span>
+        </ion-label>
+        <ion-select formControlName="glucose_range_id" required>
+          <ng-container *ngIf="period.length>0">
+            <ion-select-option *ngFor="let option of period" [value]="option.glucose_range_id">{{option.glucose_period}}</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>            
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsActivity.glucose_range_id.invalid && (formControlsActivity.glucose_range_id.dirty || formControlsActivity.glucose_range_id.touched)"
+      >
+        Select a period
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Before Activity Glucose <span class="danger">*</span>
+        </ion-label>
+        <ion-input type="number" formControlName="before_activity" required></ion-input>
+      </ion-item>                  
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsActivity.before_activity.invalid && (formControlsActivity.before_activity.dirty || formControlsActivity.before_activity.touched)"
+      >
+        Enter the glucose reading value before activity
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Activity <span class="danger">*</span>
+        </ion-label>
+        <ion-select formControlName="activity" [(ngModel)]="activityOption" required>
+          <ion-select-option value="running">Running</ion-select-option>
+          <ion-select-option value="walking">Walking</ion-select-option>
+          <ion-select-option value="cycling">Cycling</ion-select-option>
+          <ion-select-option value="dancing">Dancing</ion-select-option>
+          <ion-select-option value="aerobics">Aerobics</ion-select-option>
+          <ion-select-option value="badminton">Badminton</ion-select-option>
+          <ion-select-option value="others">Others</ion-select-option>
+        </ion-select>
+      </ion-item>            
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsActivity.activity.invalid && (formControlsActivity.activity.dirty || formControlsActivity.activity.touched)"
+      >
+        Select a activity
+      </span>
+
+      <br>
+
+      <ng-container *ngIf="activityOption=='others'">
+        <ion-item>
+          <ion-label color="dark" position="floating">Enter Your Activity <span class="danger">*</span>  
+          </ion-label>
+          <ion-input type="text" formControlName="activity_others" value=""></ion-input>
+        </ion-item>                
+        <span [style.visibility]="activityOption=='others'"
+        class="errorMessage" text-wrap 
+        *ngIf="formControlsActivity.activity_others.invalid && (formControlsActivity.activity_others.dirty || formControlsActivity.activity_others.touched)"
+        >
+        Enter the activity name
+        </span>
+
+        <br>
+      </ng-container>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Activity Duration (Hrs) <span class="danger">*</span>
+        </ion-label>
+        <ion-input type="number" formControlName="activity_duration" required></ion-input>
+      </ion-item>                  
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsActivity.activity_duration.invalid && (formControlsActivity.activity_duration.dirty || formControlsActivity.activity_duration.touched)"
+      >
+        Enter the duration of activity in Hrs (e.g. 1)
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">After Activity Glucose <span class="danger">*</span>
+        </ion-label>
+        <ion-input type="number" formControlName="after_activity" required></ion-input>
+      </ion-item>                  
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsActivity.after_activity.invalid && (formControlsActivity.after_activity.dirty || formControlsActivity.after_activity.touched)"
+      >
+        Enter the glucose reading value after activity
+      </span>
+
+      <ion-row center>  
+        <ion-col class="ion-text-center">   
+          <ion-button ion-button type="submit" [disabled]="!activityForm.valid" >SUBMIT</ion-button>  
+        </ion-col> 
+      </ion-row>
+
+    </form>
+
   </div>
 </ion-content>
