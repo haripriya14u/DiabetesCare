@@ -24,8 +24,8 @@ export class AddInsulinPage implements OnInit {
   suggestions = [];
 
   public date      = new Date();
-  myDate: String   = this.date.toLocaleString();
-  myTime: String   = new Date(this.date.getTime() - (this.date.getTimezoneOffset() * 60000)).toLocaleString();
+  myDate: String   = this.date.toISOString();
+  myTime: String   = this.date.toISOString();
 
   insulinForm = new FormGroup({
     insulin_date    : new FormControl(this.myDate, Validators.required),
@@ -161,7 +161,11 @@ export class AddInsulinPage implements OnInit {
     this.http.addInsulinLog(formData).subscribe(async (response) => {
       await this.loading.hide();
       if(response['status'] == 200) {   
-        this.insulinForm.reset();        
+        this.insulinForm.reset();  
+        this.insulinForm.patchValue({
+          insulin_date    : this.myDate,
+          insulin_time    : this.myTime,
+        });      
         this.alert.show(response['message']);
       } else if(response['status'] == 202) {
         this.toast.errorToast(response['message']);

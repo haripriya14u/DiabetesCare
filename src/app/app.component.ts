@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, ToastController } from '@ionic/angular';
+import { ModalController, Platform, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
@@ -15,7 +15,7 @@ export class AppComponent {
   exit = 0;
   safePaths = [
     '/menu/details-beneficiary',
-    '/signup'
+    '/signup',
   ];
 
   constructor(
@@ -24,6 +24,7 @@ export class AppComponent {
     private storage        : Storage,
     private statusBar      : StatusBar,
     private oneSignal      : OneSignal,
+    public modalCtrl       : ModalController,
     public  toast          : ToastController
   ) {
     this.initializeApp();
@@ -53,10 +54,16 @@ export class AppComponent {
 
       //EXIT APP
       this.platform.backButton.subscribe(() => {  
-        const path = window.location.pathname;
-        if(this.safePaths.lastIndexOf(path)<0) {
-          this.showExitConfirm(); 
-        }  
+        const path  = window.location.pathname;
+        this.modalCtrl.getTop().then((data) => {
+          
+          console.log('modal', data); console.log('path', path);
+          if(!data) {            
+            if(this.safePaths.lastIndexOf(path)<0) {          
+              this.showExitConfirm(); 
+            } 
+          }
+        }); 
       });  
     });
   }
@@ -64,6 +71,7 @@ export class AppComponent {
   showExitConfirm() {
     this.toast.create({
       message: 'Do you want to exit?',
+      duration: 1500,
       position: 'bottom',
       buttons: [{
         text: 'Stay',
@@ -77,7 +85,12 @@ export class AppComponent {
       }]
     }).then(alert => {
       this.exit += 1;
-      if(this.exit===1) {alert.present();}
+      if(this.exit===1) {
+        alert.present();
+      }
+      alert.onDidDismiss().then(() => {
+        this.exit = 0;
+      });
     });
   }
 }

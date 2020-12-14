@@ -21,8 +21,8 @@ export class AddActivityPage implements OnInit {
   period = [];
   activityOption = '';
   date = new Date();
-  myDate: String = this.date.toLocaleString();
-  myTime: String = this.date.toLocaleString();
+  myDate: String = this.date.toISOString();
+  myTime: String = this.date.toISOString();
 
   activityForm = new FormGroup({
     activity_date    : new FormControl(this.myDate, Validators.required),

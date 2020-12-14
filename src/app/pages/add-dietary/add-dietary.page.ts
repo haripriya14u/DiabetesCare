@@ -22,8 +22,8 @@ export class AddDietaryPage implements OnInit {
   period = [];
   addedItems = [];
   date = new Date();
-  myDate: String = this.date.toLocaleString();
-  myTime: String = this.date.toLocaleString();
+  myDate: String = this.date.toISOString();
+  myTime: String = this.date.toISOString();
 
   dietaryForm = new FormGroup({
     dietary_date    : new FormControl(this.myDate, Validators.required),

@@ -23,8 +23,8 @@ export class AddGlucosePage implements OnInit {
   entered_by = 'self';
 
   date = new Date();
-  myDate: String = this.date.toLocaleString();
-  myTime: String = new Date(this.date.getTime() - (this.date.getTimezoneOffset() * 60000)).toLocaleString();
+  myDate: String = this.date.toISOString();
+  myTime: String = this.date.toISOString();
 
   glucoseForm = new FormGroup({
     glucoseValue: new FormControl('', Validators.required),
@@ -93,7 +93,14 @@ export class AddGlucosePage implements OnInit {
     this.http.addGlucoseLog(data).subscribe(async (response) => {
       await this.loading.hide();
       if(response['status'] == 200) {   
-        this.glucoseForm.reset();
+        this.glucoseForm.patchValue({
+          glucoseValue: '',
+          test_date   : this.myDate,
+          time        : this.myTime,
+          period      : '',
+          entered_by  : '',
+          entered_name:'self',
+        });
         this.alert.show(response['message']);                
       } else if(response['status'] == 202) {
         this.toast.errorToast(response['message']);
