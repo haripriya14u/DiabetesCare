@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, of, Observable } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import { settings } from '../settings';
 
 @Injectable({

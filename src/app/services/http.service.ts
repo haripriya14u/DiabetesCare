@@ -218,6 +218,19 @@ export class HttpService {
     });
   }
 
+  sendMessage(arrays: any) {
+    let body = this.jsonToURLEncoded(arrays);
+    return this._http.post(`${this.url}sendMessage`, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
+    });
+  }
+
+  getMessages(arrays: any) {
+    let body = this.jsonToURLEncoded(arrays);
+    return this._http.post(`${this.url}getMessages`, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
+    });
+  }
 
   //convert a json object to the url encoded format of key=value&anotherkye=anothervalue
   private jsonToURLEncoded(jsonString) {

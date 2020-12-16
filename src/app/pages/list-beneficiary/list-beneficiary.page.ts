@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform } from '@ionic/angular';
 import { ToastService } from 'src/app/providers/toast.service';
@@ -14,15 +14,17 @@ import { HttpService } from 'src/app/services/http.service';
 export class ListBeneficiaryPage implements OnInit {
 
   public user;
+  public pageFrom;
   public beneficiaryList;
 
   constructor(
-    private authService: AuthenticationService,
-    private toast      : ToastService,
-    private http       : HttpService,
-    private router     : Router,
-    private platform   : Platform,
-    private statusBar  : StatusBar
+    private authService   : AuthenticationService,
+    private toast         : ToastService,
+    private http          : HttpService,
+    private router        : Router,
+    private activatedRoute: ActivatedRoute,
+    private platform      : Platform,
+    private statusBar     : StatusBar
   ) {
     this.platform.ready().then(() => {
       this.statusBar.overlaysWebView(false);
@@ -36,6 +38,7 @@ export class ListBeneficiaryPage implements OnInit {
       this.user = data; 
       this.getBeneficiaryByDoctorId();
     });
+    this.activatedRoute.queryParams.subscribe((data)=>{ this.pageFrom = data.pageFrom; });
   }
 
   getBeneficiaryByDoctorId() {
@@ -56,9 +59,19 @@ export class ListBeneficiaryPage implements OnInit {
   }
 
   toBeneficiary(beneficiary) {
-    this.router.navigate(['/menu/details-beneficiary'],{
-      queryParams: beneficiary,
-    });
+    if(this.pageFrom) {
+      switch(this.pageFrom) {
+        case 'chat':
+          this.router.navigate(['/menu/ask-my-doctor'],{
+            queryParams: beneficiary
+          });
+        break;
+      }
+    } else {
+      this.router.navigate(['/menu/details-beneficiary'],{
+        queryParams: beneficiary
+      });
+    }
   }
 
 }

@@ -1,18 +1,62 @@
-<ion-header class="ion-no-border">
+<ion-header class="ion-no-border">  
+  <ion-progress-bar type="indeterminate" color="success" *ngIf="showProgress"></ion-progress-bar>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
-    <ion-title class="ion-text-left">Ask My Doctor</ion-title>
-    <ion-buttons slot="end" >
-      <ion-icon name="eye" class="nav-icon"></ion-icon>
-      <ion-button></ion-button>
+    <ion-title class="ion-text-left">{{currentUser.chatPerson}}</ion-title>
+    <ion-buttons slot="end" >            
+      <ion-icon *ngIf="user.userType=='beneficiary'" routerLink="/menu/dashboard-beneficiary" routerDirection="root" class="ion-margin-end nav-icon" name="home"></ion-icon>
+      <ion-icon *ngIf="user.userType=='doctor'" routerLink="/menu/dashboard-doctor" routerDirection="root" class="ion-margin-end nav-icon" name="home"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="customPage">
+
   <div class="customContent ion-padding">   
+
     <br>
+
+    <ion-grid fixed *ngIf="messages.length>0">
+
+      <ion-row *ngFor="let message of messages">
+
+        <ion-col size="9" *ngIf="message.sender_id==currentUser.senderId" class="message my-message">
+          <b>{{ message.message }}</b>
+          <div class="time ion-text-right">
+            <br>
+            {{ relativeTime(message.message_datetime) }}
+          </div>
+        </ion-col>
+
+        <ion-col offset="3" size="9" *ngIf="message.sender_id!=currentUser.senderId" class="message other-message">
+          <b>{{ message.message }}</b>
+          <div class="time ion-text-left">
+            <br>
+            {{ relativeTime(message.message_datetime) }}
+          </div>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+
   </div>
+  
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-row class="ion-align-items-center ion-no-padding">
+      <ion-col size="10" class="message-input">
+        <ion-textarea [(ngModel)]="newMsg" autoGrow="true" rows="1" placeholder="Type a message . ."></ion-textarea>
+      </ion-col>
+      <ion-col size="2" class="ion-no-padding">
+        <ion-button class="message-btn" (click)="sendMessage()" color="light" [disabled]="newMsg===''" expand="block" fill="clear">
+          <ion-icon slot="icon-only" class="nav-icon" name="paper-plane"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

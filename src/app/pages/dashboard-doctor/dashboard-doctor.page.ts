@@ -33,7 +33,17 @@ export class DashboardDoctorPage implements OnInit {
   }
 
   toPage(page: string) {
-    this.router.navigateByUrl(page, {replaceUrl: true});
+    switch(page) {
+      case 'beneficiaryList':        
+        this.router.navigateByUrl('/menu/list-beneficiary', {replaceUrl: true});  
+      break;
+      case 'chatToBeneficiary':
+        this.router.navigate(['/menu/list-beneficiary'], {
+          replaceUrl: true,
+          queryParams: { 'pageFrom': 'chat' }
+        });  
+      break;
+    }
   }
 
 }
