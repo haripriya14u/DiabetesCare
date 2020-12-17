@@ -82,9 +82,6 @@ export class AskMyDoctorPage implements OnInit {
     this.http.getMessages(data).subscribe((response) => {
       if(response['status'] == 200) {         
         this.messages = response['data']; 
-        setTimeout(() => { 
-          this.content.scrollToBottom(200);
-        });
       } else if(response['status'] == 202) {
         this.toast.errorToast(response['message']);
       } else {
@@ -107,7 +104,10 @@ export class AskMyDoctorPage implements OnInit {
 
     this.http.sendMessage(data).subscribe((response) => {
       if(response['status'] == 200) {  
-        this.newMsg = '';
+        this.newMsg = '';        
+        setTimeout(() => { 
+          this.content.scrollToBottom(200);
+        });
       } else if(response['status'] == 202) {
         this.toast.errorToast(response['message']);
       } else {
