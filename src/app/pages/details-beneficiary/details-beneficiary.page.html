@@ -83,7 +83,7 @@
         <div class="accordion-card" *ngIf="clinicalProfileList">
           <ion-card *ngFor="let item of clinicalProfileList;let i = index;">
             <ion-card-header class="accordion" (click)="toggleAccordian($event, i, clinicalProfileList)">
-              {{item.updated_on * 1000 | date:'medium'}}
+              {{getRlative(item.updated_on)}}
             </ion-card-header>
             <ion-card-content class="panel" hide="!item.isActive">
               <ion-list>
@@ -116,7 +116,7 @@
         <div class="accordion-card" *ngIf="glucoseLogList">
           <ion-card *ngFor="let item of glucoseLogList;let i = index;">
             <ion-card-header class="accordion" (click)="toggleAccordian($event, i, glucoseLogList)">
-              {{item.dateTime * 1000 | date:'medium'}}
+              {{item.dateTime | datetime}}
             </ion-card-header>
             <ion-card-content class="panel" hide="!item.isActive">
               <ion-list *ngIf="item.periods.length>0">
@@ -145,7 +145,7 @@
         <div class="accordion-card" *ngIf="insulinLogList">
           <ion-card *ngFor="let item of insulinLogList;let i = index;">
             <ion-card-header class="accordion" (click)="toggleAccordian($event, i, insulinLogList)">
-              {{item.dateTime * 1000 | date:'medium'}}
+              {{item.dateTime | datetime}}
             </ion-card-header>
             <ion-card-content class="panel" hide="!item.isActive">
               <ion-list *ngIf="item.periods.length>0">
@@ -177,7 +177,7 @@
         <div class="accordion-card" *ngIf="activityLogList">
           <ion-card *ngFor="let item of activityLogList;let i = index;">
             <ion-card-header class="accordion" (click)="toggleAccordian($event, i, activityLogList)">
-              {{item.dateTime * 1000 | date:'medium'}}
+              {{item.dateTime | datetime}}
             </ion-card-header>
             <ion-card-content class="panel" hide="!item.isActive">
               <ion-list *ngIf="item.periods.length>0">
@@ -210,7 +210,7 @@
         <div class="accordion-card" *ngIf="dietaryLogList">
           <ion-card *ngFor="let item of dietaryLogList;let i = index;">
             <ion-card-header class="accordion" (click)="toggleAccordian($event, i, dietaryLogList)">
-              {{item.dateTime * 1000 | date:'medium'}}
+              {{item.dateTime | datetime}}
             </ion-card-header>
             <ion-card-content class="panel" hide="!item.isActive">
               <ion-list *ngIf="item.periods.length>0">

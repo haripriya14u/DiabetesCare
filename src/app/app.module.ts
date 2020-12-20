@@ -18,14 +18,16 @@ import { AlertService } from './providers/alert.service';
 import { HttpService } from './services/http.service';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   entryComponents: [],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     IonicModule.forRoot(),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
   ],
   providers: [
     StatusBar,

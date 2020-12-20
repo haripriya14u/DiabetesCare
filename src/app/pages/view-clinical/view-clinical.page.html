@@ -18,7 +18,7 @@
     <div class="accordion-card" *ngIf="clinicalProfileList">
       <ion-card *ngFor="let item of clinicalProfileList;let i = index;">
         <ion-card-header class="accordion" (click)="toggleAccordian($event, i)">
-          {{item.updated_on * 1000 | date:'medium'}}
+          {{ getRlative(item.updated_on) }}
         </ion-card-header>
         <ion-card-content class="panel" hide="!item.isActive">
           <ion-list>

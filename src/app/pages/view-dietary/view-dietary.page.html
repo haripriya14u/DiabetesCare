@@ -18,13 +18,12 @@
     <div class="accordion-card" *ngIf="dietaryLogList">
       <ion-card *ngFor="let item of dietaryLogList;let i = index;">
         <ion-card-header class="accordion" (click)="toggleAccordian($event, i)">
-          {{item.dateTime * 1000 | date:'medium'}}
+          {{item.dateTime | datetime}} - ({{item.totalCarb}} carb)
         </ion-card-header>
         <ion-card-content class="panel" hide="!item.isActive">
           <ion-list *ngIf="item.periods.length>0">
             <ion-item-group class="ion-text-wrap" *ngFor="let period of item.periods[0] | keyvalue">
               <ion-item-divider color="light">{{period.key}}</ion-item-divider>
-              <!-- <span [innerHTML]="period.value"></span> -->
               <ng-container *ngIf="period.value">
                 <ion-item *ngFor="let periodValue of period.value | keyvalue" lines="none">
                   {{periodValue.key}}

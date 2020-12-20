@@ -8,6 +8,7 @@ import { ToastService } from 'src/app/providers/toast.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HttpService } from 'src/app/services/http.service';
 import { ViewGlucosePage } from '../view-glucose/view-glucose.page';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-glucose',
@@ -23,8 +24,8 @@ export class AddGlucosePage implements OnInit {
   entered_by = 'self';
 
   date = new Date();
-  myDate: String = this.date.toISOString();
-  myTime: String = this.date.toISOString();
+  myDate: String = this.date.toUTCString();
+  myTime: String = this.date.toUTCString();
 
   glucoseForm = new FormGroup({
     glucoseValue: new FormControl('', Validators.required),
@@ -85,9 +86,19 @@ export class AddGlucosePage implements OnInit {
   }
 
   glucoseFormUpdate() {
-    let  data         = this.glucoseForm.value;
-    data['token']     = this.user.token;
-    data[data.period] = data.glucoseValue;
+    let  data                = this.glucoseForm.value;
+    data['token']            = this.user.token;
+    data[data.period]        = data.glucoseValue;
+
+    let date = moment(new Date(this.glucoseForm.value.test_date)).format('YYYY-MM-DD');
+    let time = moment(new Date(this.glucoseForm.value.time)).format('HH:mm:ss');
+    data['glucose_datetime'] = moment(date+' '+time).utc().format('YYYY-MM-DD HH:mm:ss');
+
+    this.period.forEach(period => {
+      if(period.glucose_range_id == data['period']){
+        data['glucose_time_period'] = period.glucose_period;
+      }
+    });
 
     this.loading.show();
     this.http.addGlucoseLog(data).subscribe(async (response) => {

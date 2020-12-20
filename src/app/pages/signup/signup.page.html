@@ -22,13 +22,13 @@
       <form [formGroup]="doctorForm" (ngSubmit)="doctorRegistration()">
 
         <ion-item>
-          <ion-label color="dark" position="floating">Full Name <span class="danger">*</span>            
-            <span class="errorMessage" *ngIf="formControlsDoctor.doctor_full_name.invalid && (formControlsDoctor.doctor_full_name.dirty || formControlsDoctor.doctor_full_name.touched)">
-              Enter a valid name
-            </span>
+          <ion-label color="dark" position="floating">Full Name <span class="danger">*</span>
           </ion-label>
           <ion-input type="text" formControlName="doctor_full_name" required></ion-input>
-        </ion-item>
+        </ion-item>            
+        <span class="errorMessage" *ngIf="formControlsDoctor.doctor_full_name.invalid && (formControlsDoctor.doctor_full_name.dirty || formControlsDoctor.doctor_full_name.touched)">
+          Enter a valid name
+        </span>
 
         <br>
 
@@ -46,13 +46,13 @@
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Phone (+91) <span class="danger">*</span>            
-            <span class="errorMessage" *ngIf="formControlsDoctor.doctor_phone.invalid && (formControlsDoctor.doctor_phone.dirty || formControlsDoctor.doctor_phone.touched)">
-              Enter a valid phone e.g: 9988774455
-            </span>
+          <ion-label color="dark" position="floating">Phone (+91) <span class="danger">*</span>
           </ion-label>
           <ion-input type="number" formControlName="doctor_phone" required></ion-input>
-        </ion-item>
+        </ion-item>            
+        <span class="errorMessage" *ngIf="formControlsDoctor.doctor_phone.invalid && (formControlsDoctor.doctor_phone.dirty || formControlsDoctor.doctor_phone.touched)">
+          Enter a valid phone e.g: 9988774455
+        </span>
     
         <br>
 
@@ -106,25 +106,25 @@
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Username <span class="danger">*</span>            
-            <span class="errorMessage"  *ngIf="formControlsDoctor.doctor_login_id.invalid && (formControlsDoctor.doctor_login_id.dirty || formControlsDoctor.doctor_login_id.touched)">
-              A unique ID for login. Cannot contain special characters
-            </span>
+          <ion-label color="dark" position="floating">Username <span class="danger">*</span>
           </ion-label>
           <ion-input type="text" formControlName="doctor_login_id" ></ion-input>
-        </ion-item>
+        </ion-item>            
+        <span class="errorMessage"  *ngIf="formControlsDoctor.doctor_login_id.invalid && (formControlsDoctor.doctor_login_id.dirty || formControlsDoctor.doctor_login_id.touched)">
+          A unique ID for login. Cannot contain special characters
+        </span>
 
         <br>
 
         <ion-item>
-          <ion-label color="dark" position="floating">Password <span class="danger">*</span>            
-            <span class="errorMessage"  *ngIf="formControlsDoctor.doctor_password.invalid && (formControlsDoctor.doctor_password.dirty || formControlsDoctor.doctor_password.touched)">
-              Minimum 8 characters required.
-            </span>
+          <ion-label color="dark" position="floating">Password <span class="danger">*</span>
           </ion-label>
           <ion-input [type]="showPasswordText?'text':'password'" formControlName="doctor_password" required></ion-input>
-          <ion-icon slot="end" class="nav_icon passwordEye cursor-pointer" [name]="showPasswordText?'eye':'eye-off'" color="primary" item-right (tap)="showPasswordText = !showPasswordText"></ion-icon>
-        </ion-item>
+          <ion-icon slot="end" class="nav_icon passwordEye cursor-pointer" [name]="showPasswordText?'eye':'eye-off'" color="primary" item-right (click)="showPasswordText = !showPasswordText"></ion-icon>
+        </ion-item>            
+        <span class="errorMessage"  *ngIf="formControlsDoctor.doctor_password.invalid && (formControlsDoctor.doctor_password.dirty || formControlsDoctor.doctor_password.touched)">
+          Minimum 8 characters required.
+        </span>
 
         <br>
 
@@ -249,7 +249,7 @@
           <ion-label color="dark" position="floating">Password <span class="danger">*</span>
           </ion-label>
           <ion-input [type]="showBeneficiaryPasswordText?'text':'password'" formControlName="beneficiary_password" required></ion-input>
-          <ion-icon slot="end" class="passwordEye" [name]="showBeneficiaryPasswordText?'eye':'eye-off'" color="primary" item-right (tap)="showBeneficiaryPasswordText = !showBeneficiaryPasswordText"></ion-icon>
+          <ion-icon slot="end" class="passwordEye" [name]="showBeneficiaryPasswordText?'eye':'eye-off'" color="primary" item-right (click)="showBeneficiaryPasswordText = !showBeneficiaryPasswordText"></ion-icon>
         </ion-item>            
         <span class="errorMessage"  *ngIf="formControls.beneficiary_password.invalid && (formControls.beneficiary_password.dirty || formControls.beneficiary_password.touched)">
           Minimum 8 characters required.

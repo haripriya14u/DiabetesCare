@@ -82,14 +82,8 @@ export class AskMyDoctorPage implements OnInit {
     this.http.getMessages(data).subscribe((response) => {
       if(response['status'] == 200) {         
         this.messages = response['data']; 
-      } else if(response['status'] == 202) {
-        this.toast.errorToast(response['message']);
-      } else {
-        this.toast.errorToast('Failed!, please try again later')
       }
-    },async (error) => {  
-        this.toast.errorToast('Failed, Please try again later');      
-      }
+    },async (error) => {}
     );   
     this.showProgress = false;
   }

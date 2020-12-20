@@ -8,6 +8,7 @@ import { ToastService } from 'src/app/providers/toast.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HttpService } from 'src/app/services/http.service';
 import { ViewActivityPage } from '../view-activity/view-activity.page';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-activity',
@@ -21,8 +22,8 @@ export class AddActivityPage implements OnInit {
   period = [];
   activityOption = '';
   date = new Date();
-  myDate: String = this.date.toISOString();
-  myTime: String = this.date.toISOString();
+  myDate: String = this.date.toUTCString();
+  myTime: String = this.date.toUTCString();
 
   activityForm = new FormGroup({
     activity_date    : new FormControl(this.myDate, Validators.required),
@@ -87,6 +88,16 @@ export class AddActivityPage implements OnInit {
   activityFormUpdate() {
     let  data         = this.activityForm.value;
     data['token']     = this.user.token;
+
+    let date = moment(new Date(this.activityForm.value.activity_date)).format('YYYY-MM-DD');
+    let time = moment(new Date(this.activityForm.value.activity_time)).format('HH:mm:ss');
+    data['activity_datetime'] = moment(date+' '+time).utc().format('YYYY-MM-DD HH:mm:ss');
+
+    this.period.forEach(period => {
+      if(period.glucose_range_id == data['glucose_range_id']){
+        data['activity_period'] = period.glucose_period;
+      }
+    });
 
     this.loading.show();
     this.http.addActivityLog(data).subscribe(async (response) => {

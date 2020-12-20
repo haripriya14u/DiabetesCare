@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HttpService } from 'src/app/services/http.service';
 import { SearchDietaryPage } from '../search-dietary/search-dietary.page';
 import { ViewDietaryPage } from '../view-dietary/view-dietary.page';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-dietary',
@@ -22,8 +23,8 @@ export class AddDietaryPage implements OnInit {
   period = [];
   addedItems = [];
   date = new Date();
-  myDate: String = this.date.toISOString();
-  myTime: String = this.date.toISOString();
+  myDate: String = this.date.toUTCString();
+  myTime: String = this.date.toUTCString();
 
   dietaryForm = new FormGroup({
     dietary_date    : new FormControl(this.myDate, Validators.required),
@@ -85,7 +86,6 @@ export class AddDietaryPage implements OnInit {
       component: SearchDietaryPage,
     });
     await modal.present();
-
     await modal.onWillDismiss().then((res) => {
       let item = res.data;
       if(item && item['dietary_quantity'] > 0) {
@@ -105,6 +105,16 @@ export class AddDietaryPage implements OnInit {
       let  data             = this.dietaryForm.value;
       data['token']         = this.user.token;
       data['dietary_items'] = JSON.stringify(this.addedItems);
+
+      this.period.forEach(period => {
+        if(period.dietary_range_id == data['dietary_range_id']){
+          data['period_dietary'] = period.dietary_period;
+        }
+      });
+
+      let date = moment(new Date(this.dietaryForm.value.dietary_date)).format('YYYY-MM-DD');
+      let time = moment(new Date(this.dietaryForm.value.dietary_time)).format('HH:mm:ss');
+      data['dietary_datetime'] = moment(date+' '+time).utc().format('YYYY-MM-DD HH:mm:ss');
 
       this.loading.show();
       this.http.addDietaryLog(data).subscribe(async (response) => {

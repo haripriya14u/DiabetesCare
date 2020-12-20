@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HttpService } from 'src/app/services/http.service';
 import { SuggestionInsulinPage } from '../suggestion-insulin/suggestion-insulin.page';
 import { ViewInsulinPage } from '../view-insulin/view-insulin.page';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-insulin',
@@ -24,8 +25,8 @@ export class AddInsulinPage implements OnInit {
   suggestions = [];
 
   public date      = new Date();
-  myDate: String   = this.date.toISOString();
-  myTime: String   = this.date.toISOString();
+  myDate: String   = this.date.toUTCString();
+  myTime: String   = this.date.toUTCString();
 
   insulinForm = new FormGroup({
     insulin_date    : new FormControl(this.myDate, Validators.required),
@@ -137,8 +138,7 @@ export class AddInsulinPage implements OnInit {
   async showSuggestions() {
     let modalData = {
       suggestions: this.suggestions,
-    };
-    
+    };    
     const modal = await this.modal.create({
       component: SuggestionInsulinPage, 
       cssClass: 'customModal',
@@ -152,10 +152,26 @@ export class AddInsulinPage implements OnInit {
     let formData = [];
 
     formData['token']            = this.user.token;
-    formData['insulin_date']     = data['insulin_date'];
     formData['insulin_range_id'] = data['insulin_range_id'];
-    formData['insulin_time']     = data['insulin_time'];
-    formData['insulin_units']    = JSON.stringify(data['insulin_units']);
+
+    this.period.forEach(period => {
+      if(period.insulin_range_id == data['insulin_range_id']){
+        formData['insulin_time_period'] = period.insulin_period;
+      }
+    });
+
+    data['insulin_units'].forEach(insulin_unit => {
+      this.types.forEach(type => {
+        if(type.insulin_type_id == insulin_unit['insulin_type_id']){
+          insulin_unit['insulin_name'] = type.insulin_type;
+        }
+      });
+    });
+    formData['insulin_units'] = JSON.stringify(data['insulin_units']);
+
+    let date = moment(new Date(this.insulinForm.value.insulin_date)).format('YYYY-MM-DD');
+    let time = moment(new Date(this.insulinForm.value.insulin_time)).format('HH:mm:ss');
+    formData['insulin_datetime'] = moment(date+' '+time).utc().format('YYYY-MM-DD HH:mm:ss');
     
     this.loading.show();
     this.http.addInsulinLog(formData).subscribe(async (response) => {

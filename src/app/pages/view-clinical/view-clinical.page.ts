@@ -4,6 +4,7 @@ import { ModalController, Platform } from '@ionic/angular';
 import { ToastService } from 'src/app/providers/toast.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HttpService } from 'src/app/services/http.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-view-clinical',
@@ -71,6 +72,11 @@ export class ViewClinicalPage implements OnInit {
     } else {
       panel.style.maxHeight = panel.scrollHeight + "px";
     }
+  }
+
+  getRlative(updated_on) {
+    let stillUtc = moment.unix(updated_on).toDate();
+    return moment.utc(stillUtc).local().format('lll');
   }
 
   dismissModal() {

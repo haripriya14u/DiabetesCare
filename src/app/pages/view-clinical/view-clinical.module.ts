@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { ViewClinicalPageRoutingModule } from './view-clinical-routing.module';
 
 import { ViewClinicalPage } from './view-clinical.page';
+import { PipeModule } from 'src/app/pipes/pipe.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    PipeModule,
     ViewClinicalPageRoutingModule
   ],
   declarations: [ViewClinicalPage]

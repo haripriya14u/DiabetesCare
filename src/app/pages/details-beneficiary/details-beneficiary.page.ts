@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import { ModalController, Platform } from '@ionic/angular';
 import { InsulinFormPage } from '../insulin-form/insulin-form.page';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-details-beneficiary',
@@ -234,6 +235,11 @@ export class DetailsBeneficiaryPage implements OnInit {
     } else {
       panel.style.maxHeight = panel.scrollHeight + "px";
     }
+  }
+
+  getRlative(updated_on) {
+    let stillUtc = moment.unix(updated_on).toDate();
+    return moment.utc(stillUtc).local().format('lll');
   }
 
 }
