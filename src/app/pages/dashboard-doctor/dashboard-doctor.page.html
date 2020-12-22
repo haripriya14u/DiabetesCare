@@ -37,17 +37,17 @@
           </ion-card>
         </div>
       </ion-col>   
-      <ion-col class=" ion-align-self-center ion-no-padding" size="6">
+      <ion-col class="ion-align-self-center ion-no-padding" size="6">
         <div>
-          <ion-card class="routeCards">
+          <ion-card class="routeCards" (click)="toPage('glucoseLog')">
             <ion-img src="assets/icon/medical-history.svg"></ion-img>
             <ion-text>Glucose log</ion-text>
           </ion-card>
         </div>
       </ion-col>   
-      <ion-col class=" ion-align-self-center ion-no-padding" size="6">
+      <ion-col class="ion-align-self-center ion-no-padding" size="6">
         <div>
-          <ion-card class="routeCards">
+          <ion-card class="routeCards" (click)="toPage('notifications')">
             <ion-img src="assets/icon/warning.svg"></ion-img>
             <ion-text>Alert</ion-text>
           </ion-card>
@@ -55,7 +55,7 @@
       </ion-col>   
       <ion-col class=" ion-align-self-center ion-no-padding" size="6">
         <div>
-          <ion-card class="routeCards">
+          <ion-card class="routeCards" (click)="toPage('quickContact')">
             <ion-img src="assets/icon/contact.svg"></ion-img>
             <ion-text>Quick contact</ion-text>
           </ion-card>
@@ -63,7 +63,7 @@
       </ion-col>   
       <ion-col class=" ion-align-self-center ion-no-padding" size="6">
         <div>
-          <ion-card class="routeCards">
+          <ion-card class="routeCards" (click)="toPage('prescription')">
             <ion-img src="assets/icon/medical-report.svg"></ion-img>
             <ion-text>Prescription</ion-text>
           </ion-card>
@@ -71,7 +71,7 @@
       </ion-col>   
       <ion-col class=" ion-align-self-center ion-no-padding" size="6">
         <div>
-          <ion-card class="routeCards" (click)="toPage('chatToBeneficiary')">
+          <ion-card class="routeCards" (click)="toPage('chat')">
             <ion-img src="assets/icon/question.svg"></ion-img>
             <ion-text>Chat</ion-text>
           </ion-card>

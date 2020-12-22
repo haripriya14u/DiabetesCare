@@ -1,0 +1,71 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+      <ion-title class="ion-text-left">Add Prescription</ion-title>
+    </ion-buttons>
+    <ion-buttons slot="end" >
+      <ion-icon class="ion-margin-end nav-icon" name="eye" (click)="viewGlucose()"></ion-icon>
+      <ion-icon routerLink="/menu/dashboard-doctor" routerDirection="root" class="ion-margin-end nav-icon" name="home" ></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="customPage">
+  <div class="customContent ion-padding">   
+    <br>
+
+    <form [formGroup]="prescriptionForm" (ngSubmit)="addPrescription()">
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Date <span class="danger">*</span>
+        </ion-label>
+        <ion-datetime displayFormat="DDD, DD MMM YYYY" formControlName="prescription_date" required></ion-datetime>
+      </ion-item>                  
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsPrescription.prescription_date.invalid && (formControlsPrescription.prescription_date.dirty || formControlsPrescription.prescription_date.touched)"
+      >
+        Enter a valid date
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Time <span class="danger">*</span> 
+        </ion-label>
+        <ion-datetime displayFormat="hh:mm A" formControlName="prescription_time" required></ion-datetime>
+      </ion-item>
+      <span 
+      class="errorMessage" text-wrap 
+      *ngIf="formControlsPrescription.prescription_time.invalid && (formControlsPrescription.prescription_time.dirty || formControlsPrescription.prescription_time.touched)"
+      >
+        Enter a valid time
+      </span>
+
+      <br>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Prescription <span class="danger">*</span>
+        </ion-label>
+        <ion-textarea rows="3" cols="3" autoGrow="true" formControlName="prescription" required></ion-textarea>
+      </ion-item>            
+      <span 
+      class="errorMessage ion-text-wrap"  
+      *ngIf="formControlsPrescription.prescription.invalid && (formControlsPrescription.prescription.dirty || formControlsPrescription.prescription.touched)"
+      >
+        Enter prescription details
+      </span>
+
+      <br>
+
+      <ion-row center>  
+        <ion-col class="ion-text-center">   
+          <ion-button ion-button type="submit" [disabled]="!prescriptionForm.valid" >SUBMIT</ion-button>  
+        </ion-col> 
+      </ion-row>
+
+    </form>
+
+  </div>
+</ion-content>

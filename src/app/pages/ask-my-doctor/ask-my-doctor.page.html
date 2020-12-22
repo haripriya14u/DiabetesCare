@@ -19,9 +19,7 @@
     <br>
 
     <ion-grid fixed *ngIf="messages.length>0">
-
       <ion-row *ngFor="let message of messages">
-
         <ion-col size="9" *ngIf="message.sender_id==currentUser.senderId" class="message my-message">
           <b>{{ message.message }}</b>
           <div class="time ion-text-right">
@@ -31,17 +29,15 @@
         </ion-col>
 
         <ion-col offset="3" size="9" *ngIf="message.sender_id!=currentUser.senderId" class="message other-message">
+          <h6>{{currentUser.chatPerson}}</h6>
           <b>{{ message.message }}</b>
           <div class="time ion-text-left">
             <br>
             {{ relativeTime(message.message_datetime) }}
           </div>
         </ion-col>
-
       </ion-row>
-
     </ion-grid>
-
   </div>
   
 </ion-content>

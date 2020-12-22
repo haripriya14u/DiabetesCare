@@ -55,8 +55,7 @@ export class AppComponent {
       //EXIT APP
       this.platform.backButton.subscribe(() => {  
         const path  = window.location.pathname;
-        this.modalCtrl.getTop().then((data) => {
-          
+        this.modalCtrl.getTop().then((data) => {          
           console.log('modal', data); console.log('path', path);
           if(!data) {            
             if(this.safePaths.lastIndexOf(path)<0) {          

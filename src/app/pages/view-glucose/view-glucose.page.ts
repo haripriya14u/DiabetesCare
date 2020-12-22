@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ModalController, Platform } from '@ionic/angular';
 import { ToastService } from 'src/app/providers/toast.service';
@@ -13,15 +14,17 @@ import { HttpService } from 'src/app/services/http.service';
 export class ViewGlucosePage implements OnInit {
 
   public user;
+  public params;
   public glucoseLogList;
 
   constructor(
-    private authService: AuthenticationService,
-    private toast      : ToastService,
-    private http       : HttpService,
-    public  modal      : ModalController,
-    private platform   : Platform,
-    private statusBar  : StatusBar
+    private authService   : AuthenticationService,
+    private toast         : ToastService,
+    private http          : HttpService,
+    public  modal         : ModalController,
+    private activatedRoute: ActivatedRoute,
+    private platform      : Platform,
+    private statusBar     : StatusBar
   ) {
     this.platform.ready().then(() => {
       this.statusBar.overlaysWebView(false);
@@ -35,11 +38,18 @@ export class ViewGlucosePage implements OnInit {
       this.user = data;
       this.getClinicalPorfileData();
     });
+    this.activatedRoute.queryParams.subscribe((beneficiary)=>{
+      this.params = beneficiary;
+    });
   }
 
   getClinicalPorfileData() {
     let  data     = [];
     data['token'] = this.user.token;
+
+    if(this.params) {
+      data['beneficiary_registration_id'] = this.params.beneficiary_registration_id;
+    }
     
     this.http.getGlucoseLog(data).subscribe((response) => {
       if(response['status'] == 200) { 

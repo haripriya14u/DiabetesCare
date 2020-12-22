@@ -105,6 +105,18 @@ const routes: Routes = [
       {
         path: 'search-dietary',
         loadChildren: () => import('../search-dietary/search-dietary.module').then( m => m.SearchDietaryPageModule)
+      },
+      {
+        path: 'notifications',
+        loadChildren: () => import('../notifications/notifications.module').then( m => m.NotificationsPageModule)
+      },
+      {
+        path: 'add-prescription',
+        loadChildren: () => import('../add-prescription/add-prescription.module').then( m => m.AddPrescriptionPageModule)
+      },
+      {
+        path: 'view-prescription',
+        loadChildren: () => import('../view-prescription/view-prescription.module').then( m => m.ViewPrescriptionPageModule)
       }
     ]
   },
