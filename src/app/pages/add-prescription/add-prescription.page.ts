@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform } from '@ionic/angular';
 import { ToastService } from 'src/app/providers/toast.service';
@@ -37,6 +37,7 @@ export class AddPrescriptionPage implements OnInit {
     private loading       : LoadingService,
     private alert         : AlertService,
     private toast         : ToastService,
+    private router        : Router,
     private platform      : Platform,
     private statusBar     : StatusBar
   ) {
@@ -84,6 +85,12 @@ export class AddPrescriptionPage implements OnInit {
         this.toast.errorToast('Failed, Please try again later');      
       }
     );
+  }
+
+  viewPresription() {
+    this.router.navigate(['/menu/view-prescription'],{
+      queryParams: this.params
+    });
   }
 
 }

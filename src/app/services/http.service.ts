@@ -239,6 +239,13 @@ export class HttpService {
     });
   }
 
+  getPrescription(arrays: any) {
+    let body = this.jsonToURLEncoded(arrays);
+    return this._http.post(`${this.url}getPrescription`, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
+    });
+  }
+
   //convert a json object to the url encoded format of key=value&anotherkye=anothervalue
   private jsonToURLEncoded(jsonString) {
     return Object.keys(jsonString).map(function (key) {

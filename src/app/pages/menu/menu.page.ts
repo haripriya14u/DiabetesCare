@@ -18,7 +18,7 @@ export class MenuPage implements OnInit {
     { name:'Activity Logbook', icon:'assets/icon/bicycle.svg', page:'/menu/add-activity' },
     { name:'Dietary Logbook', icon:'assets/icon/diet.svg', page:'/menu/add-dietary' },    
     { name:'Ask My Doctor', icon:'assets/icon/stethoscope.svg', page:'/menu/ask-my-doctor' },
-    { name:'Prescription', icon:'assets/icon/user.svg', page:'/menu/dashboard-beneficiarys' },
+    { name:'Prescription', icon:'assets/icon/user.svg', page:'/menu/view-prescription' },
     // { name:'Disease specific instructions', icon:'assets/icon/recipes.svg', page:'/menu/dashboard-beneficiarys' },
   ];
 

@@ -1,9 +1,34 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>view-prescription</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-left">View Prescription</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="customPage">
+  <div class="customContent ion-padding">   
+    <br>
+    
+    <div class="accordion-card" *ngIf="prescriptionList">
+      <ion-card *ngFor="let item of prescriptionList;let i = index;">
+        <ion-card-header>
+          <ion-card-subtitle>{{ item.prescription_datetime | datetime }}</ion-card-subtitle>
+          <ion-card-title>{{ item.prescription }}</ion-card-title>
+        </ion-card-header>      
+      </ion-card>
+    </div>
 
+    <div *ngIf="!prescriptionList">
+      <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+      </div>
+    </div>
+
+  </div>
 </ion-content>
