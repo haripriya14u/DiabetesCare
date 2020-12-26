@@ -17,6 +17,7 @@ export class ListBeneficiaryPage implements OnInit {
   public user;
   public pageFrom;
   public beneficiaryList;
+  public icon = 'chevron-forward-outline';
 
   constructor(
     private authService   : AuthenticationService,
@@ -40,7 +41,25 @@ export class ListBeneficiaryPage implements OnInit {
       this.user = data; 
       this.getBeneficiaryByDoctorId();
     });
-    this.activatedRoute.queryParams.subscribe((data)=>{ this.pageFrom = data.pageFrom; });
+    this.activatedRoute.queryParams.subscribe((data)=>{ 
+      this.pageFrom = data.pageFrom; 
+      if(this.pageFrom) {
+        switch(this.pageFrom) {
+          case 'chat':
+            this.icon = 'chatbox-ellipses';
+          break;
+          case 'glucoseLog':
+            this.icon = 'document-text';
+          break;
+          case 'quickContact':
+            this.icon = 'call';
+          break;
+          case 'prescription':
+            this.icon = 'fitness';
+          break;          
+        }
+      }
+    });
   }
 
   getBeneficiaryByDoctorId() {

@@ -7,17 +7,35 @@
 
 .other-message {
     background: var(--ion-color-tertiary);
+    padding: 10px;
+    border-radius: 5px;
     color: #ffffff;
+    h6 {
+        margin-top: 0px !important;
+        font-weight: 800;
+    }
+    .time {
+        float: left;
+    }
 }
 
 .my-message {
     background: var(--ion-color-secondary);
+    padding: 10px;
     color: #ffffff;
+    border-radius: 5px;
+    h6 {
+        margin-top: 0px !important;
+        font-weight: 800;
+    }
+    .time {
+        float: right;
+    }
 }
 
 .time {
-    color: #dfdfdf;
-    float: right;
+    font-style: italic;
+    color: #c4c4c4;
     font-size: small;
 }
 
@@ -34,8 +52,4 @@
         padding-left: 10px;
         padding-right: 10px;
     }
-}
-
-.message-btn {
-    
 }
