@@ -2,8 +2,12 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button text=""></ion-back-button>
+      <ion-menu-button autoHide="false" *ngIf="user.userType=='beneficiary'"></ion-menu-button>
     </ion-buttons>
     <ion-title class="ion-text-left">View Prescription</ion-title>
+    <ion-buttons slot="end" *ngIf="user.userType=='beneficiary'">            
+      <ion-icon routerLink="/menu/dashboard-beneficiary" routerDirection="root" class="ion-margin-end nav-icon" name="home"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

@@ -176,12 +176,7 @@ export class AddInsulinPage implements OnInit {
     this.loading.show();
     this.http.addInsulinLog(formData).subscribe(async (response) => {
       await this.loading.hide();
-      if(response['status'] == 200) {   
-        this.insulinForm.reset();  
-        this.insulinForm.patchValue({
-          insulin_date    : this.myDate,
-          insulin_time    : this.myTime,
-        });      
+      if(response['status'] == 200) {        
         this.alert.show(response['message']);
       } else if(response['status'] == 202) {
         this.toast.errorToast(response['message']);

@@ -103,15 +103,7 @@ export class AddGlucosePage implements OnInit {
     this.loading.show();
     this.http.addGlucoseLog(data).subscribe(async (response) => {
       await this.loading.hide();
-      if(response['status'] == 200) {   
-        this.glucoseForm.patchValue({
-          glucoseValue: '',
-          test_date   : this.myDate,
-          time        : this.myTime,
-          period      : '',
-          entered_by  : '',
-          entered_name:'self',
-        });
+      if(response['status'] == 200) { 
         this.alert.show(response['message']);                
       } else if(response['status'] == 202) {
         this.toast.errorToast(response['message']);

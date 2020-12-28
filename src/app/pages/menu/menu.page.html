@@ -24,12 +24,21 @@
       <ion-item-group *ngIf="currentMenu.length>0">     
         <ion-menu-toggle auto-hide="true">
           <ng-container *ngFor="let menu of currentMenu">
-            <ion-item [routerLink]="menu.page" routerDirection="root" detail lines="none" [color]="activePath===menu.page?'primary':''">         
+
+            <ion-item [routerLink]="menu.page" *ngIf="user.userType==='beneficiary'" routerDirection="root" detail lines="none" [color]="activePath===menu.page?'primary':''">         
               <ion-thumbnail slot="start">
                 <img [src]="menu.icon">
               </ion-thumbnail>
               <ion-label class="ion-text-wrap">{{menu.name}}</ion-label>
             </ion-item>
+
+            <ion-item *ngIf="user.userType==='doctor'" (click)="toPage(menu.page)" detail lines="none" [color]="activePath===menu.page?'primary':''">         
+              <ion-thumbnail slot="start">
+                <img [src]="menu.icon">
+              </ion-thumbnail>
+              <ion-label class="ion-text-wrap">{{menu.name}}</ion-label>
+            </ion-item>
+
           </ng-container>
         </ion-menu-toggle>
       </ion-item-group>

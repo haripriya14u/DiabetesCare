@@ -65,7 +65,6 @@ export class AddClinicalPage implements OnInit {
       await this.loading.hide();
       if(response['status'] == 200) {   
         this.alert.show(response['message']); 
-        this.clinicalProfileForm.reset();
       } else if(response['status'] == 202) {
         this.toast.errorToast(response['message']);
       } else {

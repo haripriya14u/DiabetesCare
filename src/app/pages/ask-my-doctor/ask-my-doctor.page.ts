@@ -14,10 +14,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AskMyDoctorPage implements OnInit {
 
-  @ViewChild(IonContent) content: IonContent;
+  @ViewChild(IonContent, { static: false }) content: IonContent;
 
-  showProgress = false;
-  newMsg = '';
+  showProgress   = false;
+  newMsg         = '';
+  scrollToBottom = false;
+  scrollShow     = false;
   interval;
   user;
   params;
@@ -51,6 +53,7 @@ export class AskMyDoctorPage implements OnInit {
     this.user = this.authService.getUser().then((data) => {  
       this.user = data; 
     });
+    this.scrollToBottom = true;
   }
 
   ionViewDidEnter() {
@@ -60,9 +63,7 @@ export class AskMyDoctorPage implements OnInit {
       chatPerson: this.user.userType == 'doctor'?this.params.beneficiary_name: `Dr.${this.user.doctorAssigned}`,
     }
     console.log(this.currentUser);
-    this.interval = setInterval(() => {
-      this.getMessages();
-    }, 1000);
+    this.getMessages();
   }
 
   ionViewWillLeave() {
@@ -82,6 +83,12 @@ export class AskMyDoctorPage implements OnInit {
     this.http.getMessages(data).subscribe((response) => {
       if(response['status'] == 200) {         
         this.messages = response['data']; 
+        if(this.scrollToBottom) {
+          setTimeout(() => {
+            this.content.scrollToBottom(200);
+            this.scrollToBottom = false;
+          },500);
+        }
       }
     },async (error) => {}
     );   
@@ -98,10 +105,7 @@ export class AskMyDoctorPage implements OnInit {
 
     this.http.sendMessage(data).subscribe((response) => {
       if(response['status'] == 200) {  
-        this.newMsg = '';        
-        setTimeout(() => { 
-          this.content.scrollToBottom(200);
-        });
+        this.newMsg = '';
       } else if(response['status'] == 202) {
         this.toast.errorToast(response['message']);
       } else {
@@ -115,6 +119,22 @@ export class AskMyDoctorPage implements OnInit {
 
   relativeTime(dateTime) {
     return moment.unix(dateTime).format('lll');
+  }
+
+  logScrolling($event) {
+    const scrollTop = $event.detail.scrollTop;
+    const deltaY    = $event.detail.deltaY;
+    const startY    = $event.detail.startY;
+    console.log(scrollTop,deltaY,startY); 
+    if(deltaY < 0)  {
+      this.scrollShow = true;
+    } else {
+      this.scrollShow = false;
+    }
+  }
+
+  goToBottom() {
+    this.content.scrollToBottom(300);
   }
 
 }
