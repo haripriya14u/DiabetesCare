@@ -9,7 +9,7 @@
         <ion-col size="6" class="userInfo">
           <ion-label *ngIf="user.userType==='beneficiary'">
             <h3>{{user.name}} ({{user.beneficiaryId}})</h3>
-            <p>Doctor: Dr.{{user.doctorAssigned}}</p>
+            <p>Dr.{{user.doctorAssigned}}</p>
           </ion-label>
           <ion-label *ngIf="user.userType==='doctor'">
             <h3>{{user.name}}</h3>

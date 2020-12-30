@@ -37,6 +37,9 @@ export class DashboardDoctorPage implements OnInit {
       case 'beneficiaryList':
         this.router.navigateByUrl('/menu/list-beneficiary', {replaceUrl: true}); 
       break;
+      case 'notifications':
+        this.router.navigateByUrl('/menu/notifications', {replaceUrl: true}); 
+      break;
       default:
       this.router.navigate(['/menu/list-beneficiary'], {
         replaceUrl: true,

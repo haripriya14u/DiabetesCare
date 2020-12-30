@@ -1,9 +1,38 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>notifications</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-left">Notifications</ion-title>
+    <ion-buttons slot="end">            
+      <ion-icon routerLink="/menu/dashboard-beneficiary" *ngIf="user.userType=='beneficiary'" routerDirection="root" class="ion-margin-end nav-icon" name="home"></ion-icon>
+      <ion-icon routerLink="/menu/dashboard-doctor" *ngIf="user.userType=='doctor'" routerDirection="root" class="ion-margin-end nav-icon" name="home"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="customPage">
+  <div class="customContent ">   
+    <br>
+    
+    <div class="accordion-card" *ngIf="notificationList">
+      <ion-card *ngFor="let item of notificationList;let i = index;">
+        <ion-card-header>
+          <ion-card-subtitle>{{ getLocal(item.notification_entered_on) }}</ion-card-subtitle>
+          <ion-card-title>{{ item.notification_message }}</ion-card-title>
+        </ion-card-header>      
+      </ion-card>
+    </div>
 
+    <div *ngIf="!notificationList">
+      <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+        <ion-skeleton-text animated style="width: 80vw; height: 7.8vh" slot="start"></ion-skeleton-text><br>
+      </div>
+    </div>
+
+  </div>
 </ion-content>

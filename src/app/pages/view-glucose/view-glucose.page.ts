@@ -47,7 +47,7 @@ export class ViewGlucosePage implements OnInit {
     let  data     = [];
     data['token'] = this.user.token;
 
-    if(this.params) {
+    if(this.params&&Object.keys(this.params).length>0) {
       data['beneficiary_registration_id'] = this.params.beneficiary_registration_id;
     }
     
@@ -59,7 +59,9 @@ export class ViewGlucosePage implements OnInit {
         } else {
           this.glucoseLogList = [];
         }
-      } 
+      } else {
+        this.glucoseLogList = [];
+      }
     },(error) => {
         this.glucoseLogList = [];
         this.toast.errorToast('Failed, Please try again later');

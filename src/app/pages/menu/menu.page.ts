@@ -19,7 +19,7 @@ export class MenuPage implements OnInit {
     { name:'Dietary Logbook', icon:'assets/icon/diet.svg', page:'/menu/add-dietary' },    
     { name:'Ask My Doctor', icon:'assets/icon/stethoscope.svg', page:'/menu/ask-my-doctor' },
     { name:'Prescription', icon:'assets/icon/user.svg', page:'/menu/view-prescription' },
-    // { name:'Disease specific instructions', icon:'assets/icon/recipes.svg', page:'/menu/dashboard-beneficiarys' },
+    { name:'Notification', icon:'assets/icon/warning.svg', page:'/menu/notifications' },
   ];
 
   doctorMenus = [

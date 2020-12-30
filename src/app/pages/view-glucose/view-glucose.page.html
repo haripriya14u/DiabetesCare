@@ -4,7 +4,7 @@
       <ion-back-button text=""></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-left">View Glucose</ion-title>
-    <ion-buttons slot="end" *ngIf="!params">
+    <ion-buttons slot="end" *ngIf="params===undefined || (params | keyvalue)?.length<=0">
       <ion-icon name="close-circle" size="large" (click)="dismissModal()"></ion-icon>
       <ion-button></ion-button>
     </ion-buttons>

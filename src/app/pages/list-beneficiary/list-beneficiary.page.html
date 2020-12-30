@@ -22,11 +22,11 @@
             <ion-img [src]="beneficiary.beneficiary_dp_path"></ion-img>
           </ion-thumbnail>
           <ion-label>
-            <h5>{{beneficiary.beneficiary_name}}</h5>
+            <h5>{{beneficiary.beneficiary_name}}</h5><p *ngIf="pageFrom=='quickContact'">{{beneficiary.beneficiary_phone}}</p>
             <p>#{{beneficiary.beneficiary_id}}</p>
           </ion-label>
           <ion-icon class="animate__animated animate__flash animate__slower animate__infinite" slot="end" name="notifications" size="small" color="danger" *ngIf="beneficiary.insulin_suggestion>0"></ion-icon>
-          <ion-icon slot="end" [name]="icon" size="small" color="primary"></ion-icon>
+          <ion-icon slot="end" [name]="icon" color="primary"></ion-icon>
         </ion-item>
       </ion-card>
     </div>

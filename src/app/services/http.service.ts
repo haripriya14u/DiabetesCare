@@ -246,6 +246,13 @@ export class HttpService {
     });
   }
 
+  getNotification(arrays: any) {
+    let body = this.jsonToURLEncoded(arrays);
+    return this._http.post(`${this.url}getNotification`, body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
+    });
+  }
+
   //convert a json object to the url encoded format of key=value&anotherkye=anothervalue
   private jsonToURLEncoded(jsonString) {
     return Object.keys(jsonString).map(function (key) {
