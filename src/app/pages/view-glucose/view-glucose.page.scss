@@ -1,0 +1,11 @@
+.nav-icon {
+    position: absolute !important;
+    right: 13vw !important;
+    height: 5vw;
+    width: 5vw;
+    top: 4.5vh;
+    border: 1px solid #ffffff;
+    slot {
+        font-size: 1rem;
+    }
+}

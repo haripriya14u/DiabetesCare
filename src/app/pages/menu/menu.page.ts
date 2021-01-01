@@ -18,7 +18,7 @@ export class MenuPage implements OnInit {
     { name:'Activity Logbook', icon:'assets/icon/bicycle.svg', page:'/menu/add-activity' },
     { name:'Dietary Logbook', icon:'assets/icon/diet.svg', page:'/menu/add-dietary' },    
     { name:'Ask My Doctor', icon:'assets/icon/stethoscope.svg', page:'/menu/ask-my-doctor' },
-    { name:'Prescription', icon:'assets/icon/user.svg', page:'/menu/view-prescription' },
+    { name:'Prescription', icon:'assets/icon/medicine.svg', page:'/menu/view-prescription' },
     { name:'Notification', icon:'assets/icon/warning.svg', page:'/menu/notifications' },
   ];
 
@@ -27,7 +27,7 @@ export class MenuPage implements OnInit {
     { name:'My Profile', icon:'assets/icon/user.svg', page:'profile-doctor' },
     { name:'Beneficiary List', icon:'assets/icon/group.svg', page:'beneficiaryList' },
     { name:'Glucose Logbook', icon:'assets/icon/drop.svg', page:'glucoseLog' },
-    { name:'Prescription', icon:'assets/icon/health.svg', page:'prescription' },
+    { name:'Prescription', icon:'assets/icon/medicine.svg', page:'prescription' },
     { name:'Notification', icon:'assets/icon/warning.svg', page:'notifications' },
     { name:'Quick contact', icon:'assets/icon/stethoscope.svg', page:'quickContact' },
     { name:'Chat', icon:'assets/icon/question.svg', page:'chat' },

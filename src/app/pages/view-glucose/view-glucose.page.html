@@ -17,7 +17,10 @@
     
     <div class="accordion-card" *ngIf="glucoseLogList">
       <ion-card *ngFor="let item of glucoseLogList;let i = index;">
-        <ion-card-header class="accordion" (click)="toggleAccordian($event, i)">
+        <ion-card-header class="accordion" (click)="toggleAccordian($event, i)">    
+          <ion-badge name="ellipse" *ngIf="item.time_in_range=='IN'" class="nav-icon vertical-center" color="success">&nbsp;</ion-badge>
+          <ion-badge name="ellipse" *ngIf="item.time_in_range=='OUT'" class="nav-icon vertical-center" color="danger">&nbsp;</ion-badge>
+          <ion-badge name="ellipse" *ngIf="item.time_in_range=='X'" class="nav-icon vertical-center" color="medium">&nbsp;</ion-badge>
           {{ item.dateTime | datetime }}
         </ion-card-header>
         <ion-card-content class="panel" hide="!item.isActive">

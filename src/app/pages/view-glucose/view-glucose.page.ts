@@ -85,6 +85,18 @@ export class ViewGlucosePage implements OnInit {
     }
   }
 
+  getColor(range) {
+    console.log(range);
+    switch(range) {
+      case 'OUT':
+        return 'danger';
+      case 'IN':
+        return 'success';
+      default:
+        return 'success';
+    }
+  }
+
   dismissModal() {
     this.modal.dismiss({
       'dismissed': true
