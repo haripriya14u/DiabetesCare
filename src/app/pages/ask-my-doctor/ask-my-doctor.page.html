@@ -26,7 +26,7 @@
     <br>
 
     <ion-grid fixed *ngIf="messages.length>0">
-      <ion-row *ngFor="let message of messages">
+      <ion-row *ngFor="let message of messages;trackBy: trackByFn">
         <ion-col size="9" *ngIf="message.sender_id==currentUser.senderId" class="message">
           <div class="my-message">     
             <h6>{{user.name}}</h6>            
