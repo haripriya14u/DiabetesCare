@@ -62,8 +62,9 @@ export class AskMyDoctorPage implements OnInit {
       receiverId: this.user.userType == 'doctor'?this.params.beneficiary_id:this.user.doctorId,
       chatPerson: this.user.userType == 'doctor'?this.params.beneficiary_name: `Dr.${this.user.doctorAssigned}`,
     }
-    console.log(this.currentUser);
-    this.getMessages();
+    this.interval = setInterval(() => {
+      this.getMessages();
+    }, 1000);
   }
 
   ionViewWillLeave() {
@@ -115,6 +116,10 @@ export class AskMyDoctorPage implements OnInit {
         this.toast.errorToast('Failed, Please try again later');      
       }
     );
+  }
+
+  trackByFn(index, item) {
+    return index; // or item.id
   }
 
   relativeTime(dateTime) {
