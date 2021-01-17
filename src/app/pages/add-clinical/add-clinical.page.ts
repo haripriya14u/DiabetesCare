@@ -26,6 +26,8 @@ export class AddClinicalPage implements OnInit {
     current_hba                        : new FormControl('', Validators.required),
     current_insulin_dose               : new FormControl('', Validators.required),
     study_period_hospitalization       : new FormControl('', Validators.required),
+    ketone_test_blood                  : new FormControl('', Validators.required),
+    ketone_test_urine                  : new FormControl('', Validators.required),
     study_period_hospitalization_reason: new FormControl(''),
   });
 

@@ -51,7 +51,9 @@ export class NotificationsPage implements OnInit {
         } else {
           this.notificationList = [];
         }
-      } 
+      } else {
+        this.notificationList = [];
+      }
     },(error) => {
         this.notificationList = [];
         this.toast.errorToast('Failed, Please try again later');

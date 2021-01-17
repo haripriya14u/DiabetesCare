@@ -26,6 +26,8 @@ export class AddDietaryPage implements OnInit {
   myDate: String = this.date.toUTCString();
   myTime: String = this.date.toUTCString();
 
+  maxDate = moment(new Date()).format('YYYY-MM-DD');
+
   dietaryForm = new FormGroup({
     dietary_date    : new FormControl(this.myDate, Validators.required),
     dietary_time    : new FormControl(this.myTime, Validators.required),

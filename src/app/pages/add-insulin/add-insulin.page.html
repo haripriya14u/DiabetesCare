@@ -21,7 +21,7 @@
       <ion-item>
         <ion-label color="dark" position="floating">Date <span class="danger">*</span>
         </ion-label>
-        <ion-datetime displayFormat="DDD, DD MMM YYYY" formControlName="insulin_date" required></ion-datetime>
+        <ion-datetime displayFormat="DDD, DD MMM YYYY" formControlName="insulin_date" max="{{maxDate}}" required></ion-datetime>
       </ion-item>                  
       <span 
       class="errorMessage" text-wrap 
@@ -49,7 +49,7 @@
       <ion-item>
         <ion-label color="dark" position="floating">Period <span class="danger">*</span>
         </ion-label>
-        <ion-select formControlName="insulin_range_id" required>
+        <ion-select formControlName="insulin_range_id" [(ngModel)]="insulin_range_id" required (ionChange)="getAccepetedSuggestions()">
           <ng-container *ngIf="period.length>0">
             <ion-select-option *ngFor="let option of period" [value]="option.insulin_range_id">{{option.insulin_period}}</ion-select-option>
           </ng-container>

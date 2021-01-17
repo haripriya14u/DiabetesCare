@@ -23,10 +23,13 @@ export class AddInsulinPage implements OnInit {
   period      = [];
   types       = [];
   suggestions = [];
+  insulin_range_id;
 
   public date      = new Date();
   myDate: String   = this.date.toUTCString();
   myTime: String   = this.date.toUTCString();
+  
+  maxDate = moment(new Date()).format('YYYY-MM-DD');
 
   insulinForm = new FormGroup({
     insulin_date    : new FormControl(this.myDate, Validators.required),
@@ -105,8 +108,7 @@ export class AddInsulinPage implements OnInit {
 
     this.http.getInsulinTypes(data).subscribe((response) => {
       if(response['status'] == 200) {         
-        this.types = response['data'];        
-        this.getAccepetedSuggestions();
+        this.types = response['data'];  
       } else if(response['status'] == 202) {
         this.toast.errorToast(response['message']);
       } else {
@@ -120,19 +122,23 @@ export class AddInsulinPage implements OnInit {
   }
 
   getAccepetedSuggestions() {
-    let  data         = [];
-    data['token']     = this.user.token;
+    if(this.insulin_range_id!='') {
+      let  data                = [];
+      data['token']            = this.user.token;
+      data['insulin_range_id'] = this.insulin_range_id;
+      data['date']             = moment(new Date().toUTCString()).format('YYYY-MM-DD');
 
-    this.loading.show();
-    this.http.getAccepetedSuggestions(data).subscribe(async (response) => {
-      await this.loading.hide();
-      if(response['status'] == 200) {         
-        this.suggestions = response['data'];
-      }
-    },async (error) => {
-        await this.loading.hide();      
-      }
-    );
+      this.loading.show();
+      this.http.getAccepetedSuggestions(data).subscribe(async (response) => {
+        await this.loading.hide();
+        if(response['status'] == 200) {         
+          this.suggestions = response['data'];
+        }
+      },async (error) => {
+          await this.loading.hide();      
+        }
+      );
+    }
   }
 
   async showSuggestions() {

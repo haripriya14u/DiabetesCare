@@ -29,7 +29,7 @@
       <ion-item>
         <ion-label color="dark" position="floating">Date <span class="danger">*</span>
         </ion-label>
-        <ion-datetime displayFormat="DDD, DD MMM YYYY" formControlName="test_date" required></ion-datetime>
+        <ion-datetime displayFormat="DDD, DD MMM YYYY" formControlName="test_date" max="{{maxDate}}" required></ion-datetime>
       </ion-item>                  
       <span 
       class="errorMessage" text-wrap 
@@ -71,38 +71,7 @@
       </span>
 
       <br>
-
-      <ion-item>
-        <ion-label color="dark" position="floating">Tested by <span class="danger">*</span>
-        </ion-label>
-        <ion-select interface="popover" formControlName="entered_by" required [(ngModel)]="entered_by">
-          <ion-select-option value="self">By myself</ion-select-option>
-          <ion-select-option value="others">Others</ion-select-option>
-        </ion-select>
-      </ion-item>                  
-      <span 
-      class="errorMessage" text-wrap 
-      *ngIf="formControlsGlucose.entered_by.invalid && (formControlsGlucose.entered_by.dirty || formControlsGlucose.entered_by.touched)"
-      >
-      select the option who took the glucose reading
-      </span>
-
-      <br>
-
-      <ion-item [style.visibility]="(entered_by&&entered_by=='others')?'visible':'hidden'">
-        <ion-label color="dark" position="floating">Centre Name <span class="danger">*</span>  
-        </ion-label>
-        <ion-input type="text" formControlName="entered_name" required></ion-input>
-      </ion-item>                
-      <span [style.visibility]="(entered_by&&entered_by=='others')?'visible':'hidden'"
-      class="errorMessage" text-wrap 
-      *ngIf="formControlsGlucose.entered_name.invalid && (formControlsGlucose.entered_name.dirty || formControlsGlucose.entered_name.touched)"
-      >
-      Enter the center name where you took the glucose reading
-      </span>
-
-      <br>
-
+      
       <ion-row center>  
         <ion-col class="ion-text-center">   
           <ion-button ion-button type="submit" [disabled]="!glucoseForm.valid" >SUBMIT</ion-button>  

@@ -21,19 +21,21 @@ export class AddGlucosePage implements OnInit {
 
   myGlucose: Number = 0;
   period = [];
-  entered_by = 'self';
+  entered_by = ' ';
 
   date = new Date();
   myDate: String = this.date.toUTCString();
   myTime: String = this.date.toUTCString();
+
+  maxDate = moment(new Date()).format('YYYY-MM-DD');
 
   glucoseForm = new FormGroup({
     glucoseValue: new FormControl('', Validators.required),
     test_date   : new FormControl(this.myDate, Validators.required),
     time        : new FormControl(this.myTime, Validators.required),
     period      : new FormControl('', Validators.required),
-    entered_by  : new FormControl('', Validators.required),
-    entered_name: new FormControl('self', Validators.required),
+    entered_by  : new FormControl(''),
+    entered_name: new FormControl(' '),
   });
 
   constructor(

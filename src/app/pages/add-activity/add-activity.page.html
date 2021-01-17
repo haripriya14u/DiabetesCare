@@ -20,7 +20,7 @@
       <ion-item>
         <ion-label color="dark" position="floating">Date <span class="danger">*</span>
         </ion-label>
-        <ion-datetime displayFormat="DDD, DD MMM YYYY" formControlName="activity_date" required></ion-datetime>
+        <ion-datetime displayFormat="DDD, DD MMM YYYY" formControlName="activity_date" max="{{maxDate}}" required></ion-datetime>
       </ion-item>                  
       <span 
       class="errorMessage" text-wrap 

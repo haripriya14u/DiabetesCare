@@ -18,6 +18,7 @@
     <div class="accordion-card" *ngIf="insulinLogList">
       <ion-card *ngFor="let item of insulinLogList;let i = index;">
         <ion-card-header class="accordion" (click)="toggleAccordian($event, i)">
+          <ion-badge *ngIf="item.insulin_sensitivity_factor>0" class="nav-icon vertical-center" color="success">{{item.insulin_sensitivity_factor}}</ion-badge>
           {{item.dateTime | datetime}}
         </ion-card-header>
         <ion-card-content class="panel" hide="!item.isActive">
