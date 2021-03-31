@@ -88,9 +88,9 @@ export class AddGlucosePage implements OnInit {
   }
 
   glucoseFormUpdate() {
-    let  data                = this.glucoseForm.value;
-    data['token']            = this.user.token;
-    data[data.period]        = data.glucoseValue;
+    let  data         = this.glucoseForm.value;
+    data['token']     = this.user.token;
+    data[data.period] = data.glucoseValue;
 
     let date = moment(new Date(this.glucoseForm.value.test_date)).format('YYYY-MM-DD');
     let time = moment(new Date(this.glucoseForm.value.time)).format('HH:mm:ss');

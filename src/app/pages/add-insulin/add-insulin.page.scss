@@ -1,0 +1,17 @@
+.total-insulin {
+    position: inherit;
+    bottom: 0;
+    width: 98%;
+    padding: 10px;
+    letter-spacing: 0.8px;
+
+    ion-col {
+        border: 1px solid var(--ion-color-primary);
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    ion-text {
+        font-weight: 600;
+    }
+}

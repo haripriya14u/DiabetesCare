@@ -5,7 +5,7 @@
         <ion-menu-button autoHide="false" color="light"></ion-menu-button>
       </ion-buttons>  
       <ion-buttons slot="end" >
-        <ion-icon slot="end" name="notifications" color="light"></ion-icon>
+        <ion-icon slot="end" name="notifications" [color]="suggestions.length>0?'danger':'light'" (click)="showSuggestions()"></ion-icon>
         <ion-button></ion-button>
       </ion-buttons>
     </ion-toolbar>

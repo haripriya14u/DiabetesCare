@@ -14,18 +14,31 @@
 <ion-content class="customPage">
   <div class="customContent ion-padding">
 
-    <ion-text class="ion-text-center" color="primary">
-      <h6>{{suggestions[0].suggestion_date}}</h6>
-    </ion-text>
-
-    <ion-card lines="none" *ngIf="suggestions.length>0">
-      <ion-item *ngFor="let suggestion of suggestions">
-        <ion-label>
-          {{suggestion.insulin_period}}
-        </ion-label>
-        <ion-text color="primary" slot="end">{{suggestion.suggestion_unit}}</ion-text>
-      </ion-item>      
-    </ion-card>
+    <ng-container *ngIf="suggestions.length>0">    
+      <ion-card *ngFor="let suggestion of suggestions; let index=i;">
+        <ion-card-header>
+          <ion-card-subtitle>{{suggestion.suggestion_date}}</ion-card-subtitle>
+          <ion-card-title>
+            {{suggestion.beneficiary_name}}
+            <ion-badge>{{suggestion.suggestion_unit}}</ion-badge>
+          </ion-card-title>
+        </ion-card-header>      
+        <ion-card-content>
+          <ng-container *ngIf="suggestion.suggestion_status=='SUGGESTED'">     
+            <div class="notes">
+              <ion-textarea rows="2" autoGrow="true" placeholder="Enter any notes here..." [(ngModel)]="notes[i]"></ion-textarea>      
+            </div>
+            <br>
+            <ion-button color="danger" size="small" (click)="updateSuggestions(i,suggestion.beneficiary_registration_id,suggestion.suggestion_id,suggestion.suggestion_unit,'REJECTED')">Reject</ion-button>
+            <ion-button color="primary" size="small" (click)="updateSuggestions(i,suggestion.beneficiary_registration_id,suggestion.suggestion_id,suggestion.suggestion_unit,'ACCEPTED')">Approve</ion-button>
+          </ng-container>     
+          <ng-container *ngIf="suggestion.suggestion_status!='SUGGESTED'">
+            <ion-button color="success" size="small" *ngIf="suggestion.suggestion_status=='ACCEPTED'" mode="ios">ACCEPTED</ion-button>
+            <ion-button color="danger" size="small" *ngIf="suggestion.suggestion_status=='REJECTED'" mode="ios">REJECTED</ion-button>
+          </ng-container>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
 
   </div>
 </ion-content>

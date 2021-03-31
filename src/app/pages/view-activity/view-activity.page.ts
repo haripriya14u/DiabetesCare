@@ -45,7 +45,7 @@ export class ViewActivityPage implements OnInit {
       if(response['status'] == 200) { 
         let data = response['data'];
         if(data.length>0) {
-          this.activityLogList = data;
+          this.activityLogList = data.slice().reverse();
         } else {
           this.activityLogList = [];
         }

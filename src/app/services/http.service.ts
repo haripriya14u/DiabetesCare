@@ -108,9 +108,9 @@ export class HttpService {
     });
   }
 
-  getAccepetedSuggestions(arrays: any) {
+  getTodaysTotalInsulin(arrays: any) {
     let body = this.jsonToURLEncoded(arrays);
-    return this._http.post(`${this.url}getAccepetedSuggestions`, body, {
+    return this._http.post(`${this.url}getTodaysTotalInsulin`, body, {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded;')
     });
   }

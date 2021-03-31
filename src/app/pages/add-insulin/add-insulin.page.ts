@@ -7,7 +7,6 @@ import { LoadingService } from 'src/app/providers/loading.service';
 import { ToastService } from 'src/app/providers/toast.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HttpService } from 'src/app/services/http.service';
-import { SuggestionInsulinPage } from '../suggestion-insulin/suggestion-insulin.page';
 import { ViewInsulinPage } from '../view-insulin/view-insulin.page';
 import * as moment from 'moment';
 
@@ -19,11 +18,10 @@ import * as moment from 'moment';
 export class AddInsulinPage implements OnInit {
 
   public user;
+  public total_insulin = 0;
 
   period      = [];
   types       = [];
-  suggestions = [];
-  insulin_range_id;
 
   public date      = new Date();
   myDate: String   = this.date.toUTCString();
@@ -99,7 +97,8 @@ export class AddInsulinPage implements OnInit {
         this.toast.errorToast('Failed, Please try again later');      
       }
     );
-    this.getInsulinTypes();
+    this.getInsulinTypes();    
+    this.getTodaysTotalInsulin();
   }
 
   getInsulinTypes() {
@@ -121,38 +120,28 @@ export class AddInsulinPage implements OnInit {
     this.addInsulinForm();
   }
 
-  getAccepetedSuggestions() {
-    if(this.insulin_range_id!='') {
-      let  data                = [];
-      data['token']            = this.user.token;
-      data['insulin_range_id'] = this.insulin_range_id;
-      data['date']             = moment(new Date().toUTCString()).format('YYYY-MM-DD');
+  getTodaysTotalInsulin() {
+    let  data         = [];
+    data['token']     = this.user.token;
 
-      this.loading.show();
-      this.http.getAccepetedSuggestions(data).subscribe(async (response) => {
-        await this.loading.hide();
-        if(response['status'] == 200) {         
-          this.suggestions = response['data'];
-        }
-      },async (error) => {
-          await this.loading.hide();      
-        }
-      );
-    }
+    let date = moment(new Date(this.insulinForm.value.insulin_date)).format('YYYY-MM-DD');
+    let time = moment(new Date(this.insulinForm.value.insulin_time)).format('HH:mm:ss');
+    data['insulin_datetime'] = moment(date+' '+time).utc().format('YYYY-MM-DD HH:mm:ss');
+
+    this.http.getTodaysTotalInsulin(data).subscribe((response) => {
+      if(response['status'] == 200) {         
+        this.total_insulin = (response['data'])?parseInt(response['data']):0;  
+      } else if(response['status'] == 202) {
+        this.toast.errorToast(response['message']);
+      } else {
+        this.toast.errorToast('Failed!, please try again later')
+      }
+    },async (error) => {  
+        this.toast.errorToast('Failed, Please try again later');      
+      }
+    );
   }
 
-  async showSuggestions() {
-    let modalData = {
-      suggestions: this.suggestions,
-    };    
-    const modal = await this.modal.create({
-      component: SuggestionInsulinPage, 
-      cssClass: 'customModal',
-      componentProps: modalData
-    });
-    return await modal.present();
-  }
-    
   insulinFormUpdate() {
     let data     = this.insulinForm.value; 
     let formData = [];
@@ -194,6 +183,8 @@ export class AddInsulinPage implements OnInit {
         this.toast.errorToast('Failed, Please try again later');      
       }
     )
+
+    this.getTodaysTotalInsulin();
   }
 
   async viewInsulin() {

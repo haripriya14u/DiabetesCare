@@ -5,7 +5,6 @@
       <ion-title class="ion-text-left">Add Insulin</ion-title>
     </ion-buttons>
     <ion-buttons slot="end" >            
-      <ion-icon class="ion-margin-end nav-icon" name="alert-circle" (click)="showSuggestions()" *ngIf="suggestions.length>0"></ion-icon>
       <ion-icon class="ion-margin-end nav-icon" name="eye" (click)="viewInsulin()"></ion-icon>
       <ion-icon routerLink="/menu/dashboard-beneficiary" routerDirection="root" class="ion-margin-end nav-icon" name="home"></ion-icon>
     </ion-buttons>
@@ -21,7 +20,7 @@
       <ion-item>
         <ion-label color="dark" position="floating">Date <span class="danger">*</span>
         </ion-label>
-        <ion-datetime displayFormat="DDD, DD MMM YYYY" formControlName="insulin_date" max="{{maxDate}}" required></ion-datetime>
+        <ion-datetime (ionChange)="getTodaysTotalInsulin()" displayFormat="DDD, DD MMM YYYY" formControlName="insulin_date" max="{{maxDate}}" required></ion-datetime>
       </ion-item>                  
       <span 
       class="errorMessage" text-wrap 
@@ -35,7 +34,7 @@
       <ion-item>
         <ion-label color="dark" position="floating">Time <span class="danger">*</span> 
         </ion-label>
-        <ion-datetime displayFormat="hh:mm A" formControlName="insulin_time" required></ion-datetime>
+        <ion-datetime (ionChange)="getTodaysTotalInsulin()" displayFormat="hh:mm A" formControlName="insulin_time" required></ion-datetime>
       </ion-item>
       <span 
       class="errorMessage" text-wrap 
@@ -49,7 +48,7 @@
       <ion-item>
         <ion-label color="dark" position="floating">Period <span class="danger">*</span>
         </ion-label>
-        <ion-select formControlName="insulin_range_id" [(ngModel)]="insulin_range_id" required (ionChange)="getAccepetedSuggestions()">
+        <ion-select formControlName="insulin_range_id" required>
           <ng-container *ngIf="period.length>0">
             <ion-select-option *ngFor="let option of period" [value]="option.insulin_range_id">{{option.insulin_period}}</ion-select-option>
           </ng-container>
@@ -69,7 +68,7 @@
           <ion-row>
             <ion-col size="6">
               <ion-item>
-                <ion-label color="dark" position="floating">Insuline <span class="danger">*</span> </ion-label>
+                <ion-label color="dark" position="floating">Insulin <span class="danger">*</span> </ion-label>
                 <ion-select class="full-width" formControlName="insulin_type_id" required>
                   <ng-container *ngIf="types.length>0">
                     <ion-select-option *ngFor="let type of types" [value]="type.insulin_type_id">{{type.insulin_type}}</ion-select-option>
@@ -102,6 +101,13 @@
       </ion-row>
 
     </form>
+    
+    <ion-row center *ngIf="total_insulin>0" class="total-insulin ">  
+      <ion-col size="12" class="ion-text-center">   
+        Total insulin for the day: &nbsp;         
+        <ion-text color="primary">{{total_insulin}}</ion-text>  
+      </ion-col> 
+    </ion-row>
 
   </div>
 </ion-content>
