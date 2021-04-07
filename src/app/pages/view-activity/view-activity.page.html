@@ -27,7 +27,7 @@
               <ng-container *ngIf="period.value">
                 <ion-item *ngFor="let periodValue of period.value | keyvalue" lines="none">
                   {{periodValue.key}}
-                  <h5 slot="end">{{periodValue.value}}</h5>
+                  <h5 slot="end">{{periodValue.value | number: '1.0-0'}}</h5>
                 </ion-item>
               </ng-container>
             </ion-item-group>

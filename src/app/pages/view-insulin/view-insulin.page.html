@@ -18,7 +18,10 @@
     <div class="accordion-card" *ngIf="insulinLogList">
       <ion-card *ngFor="let item of insulinLogList;let i = index;">
         <ion-card-header class="accordion" (click)="toggleAccordian($event, i)">
-          <ion-badge *ngIf="item.insulin_sensitivity_factor>0" class="nav-icon vertical-center" color="success">{{item.insulin_sensitivity_factor}}</ion-badge>
+          <ion-badge *ngIf="item.insulin_sensitivity_factor>0" class="nav-icon vertical-center ion-margin-right" color="success">{{item.insulin_sensitivity_factor | number: '1.0-0'}}</ion-badge>
+          <ion-badge *ngIf="item.total_units>0" class="nav-icon vertical-center" color="warning">
+            <ion-text color="light">{{item.total_units}}</ion-text>
+          </ion-badge>
           {{item.dateTime | datetime}}
         </ion-card-header>
         <ion-card-content class="panel" hide="!item.isActive">
@@ -28,7 +31,7 @@
               <ng-container *ngIf="period.value">
                 <ion-item *ngFor="let periodValue of period.value | keyvalue" lines="none">
                   {{periodValue.key}}
-                  <h5 slot="end">{{periodValue.value}}</h5>
+                  <h5 slot="end">{{periodValue.value | number: '1.0-0'}}</h5>
                 </ion-item>
               </ng-container>
             </ion-item-group>

@@ -18,14 +18,20 @@
     <div class="accordion-card" *ngIf="glucoseLogList">
       <ion-card *ngFor="let item of glucoseLogList;let i = index;">
         <ion-card-header class="accordion" (click)="toggleAccordian($event, i)">    
-          <ion-badge name="ellipse" *ngIf="item.time_in_range=='IN'" class="nav-icon vertical-center" color="success">&nbsp;</ion-badge>
-          <ion-badge name="ellipse" *ngIf="item.time_in_range=='OUT'" class="nav-icon vertical-center" color="danger">&nbsp;</ion-badge>
-          <ion-badge name="ellipse" *ngIf="item.time_in_range=='X'" class="nav-icon vertical-center" color="medium">&nbsp;</ion-badge>
+          <ion-badge *ngIf="item.time_in_range=='IN'" class="nav-icon vertical-center ellipse" color="success">
+            <ion-text>{{item.time_in_range_value}}</ion-text>
+          </ion-badge>
+          <ion-badge *ngIf="item.time_in_range=='OUT'" class="nav-icon vertical-center ellipse" color="danger">
+            <ion-text>{{item.time_in_range_value}}</ion-text>
+          </ion-badge>
+          <ion-badge *ngIf="item.time_in_range=='NC'" class="nav-icon vertical-center ellipse" color="medium">
+            <ion-text>NC</ion-text>
+          </ion-badge>
           {{ item.dateTime | datetime }}
         </ion-card-header>
         <ion-card-content class="panel" hide="!item.isActive">
           <ion-list *ngIf="item.periods.length>0">
-            <ng-container *ngFor="let period of item.periods[0] | keyvalue">
+            <ng-container *ngFor="let period of item.periods[0] | keyvalue: returnZero">
               <ion-item class="ion-text-wrap">
                 {{period.key}}
                 <h5 slot="end" [innerHTML]="period.value"></h5>

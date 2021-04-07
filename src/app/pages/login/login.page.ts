@@ -48,6 +48,7 @@ export class LoginPage implements OnInit {
 
   toggleUser(ev: any) {
     this.userType = ev.detail.value;
+    this.loginForm.reset();
   }
 
   login() {

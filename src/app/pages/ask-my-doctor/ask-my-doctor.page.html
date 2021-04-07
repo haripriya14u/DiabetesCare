@@ -27,7 +27,7 @@
 
     <ion-grid fixed *ngIf="messages.length>0">
       <ion-row *ngFor="let message of messages;trackBy: trackByFn">
-        <ion-col size="9" *ngIf="message.sender_id==currentUser.senderId" class="message">
+        <ion-col size="9" *ngIf="message.sender_id!=currentUser.senderId" class="message">
           <div class="my-message">     
             <h6>{{user.name}}</h6>            
             <b>{{ message.message }}</b>
@@ -37,7 +37,7 @@
           </div>
         </ion-col>
 
-        <ion-col offset="3" size="9" *ngIf="message.sender_id!=currentUser.senderId" class="message ">
+        <ion-col offset="3" size="9" *ngIf="message.sender_id==currentUser.senderId" class="message ">
           <div class="other-message">            
             <h6>{{currentUser.chatPerson}}</h6>
             <b>{{ message.message }}</b>

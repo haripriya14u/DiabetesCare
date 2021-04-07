@@ -97,6 +97,10 @@ export class ViewGlucosePage implements OnInit {
     }
   }
 
+  returnZero() {
+    return 0;
+  }
+
   dismissModal() {
     this.modal.dismiss({
       'dismissed': true

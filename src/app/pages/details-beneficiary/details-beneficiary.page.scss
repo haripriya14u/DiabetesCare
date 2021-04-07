@@ -3,6 +3,14 @@ hr {
     width: 70%;
 }
 
+.nav-icon {
+    position: absolute !important;
+    right: 13vw !important;
+    top: 4vh;
+    border: 1px solid #ffffff;
+    font-size: 0.8rem !important;    
+}
+
 ion-segment {
     --background        : var(--ion-color-primary);
     ion-segment-button {
