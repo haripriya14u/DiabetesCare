@@ -4,16 +4,17 @@
       <ion-menu-button autoHide="false"></ion-menu-button>
       <ion-title class="ion-text-left">Add Clinical Profile</ion-title>
     </ion-buttons>
-    <ion-buttons slot="end" >
+    <ion-buttons slot="end">
       <ion-icon class="ion-margin-end nav-icon" name="eye" (click)="viewClinical()"></ion-icon>
-      <ion-icon routerLink="/menu/dashboard-beneficiary" routerDirection="root" class="ion-margin-end nav-icon" name="home"></ion-icon>
+      <ion-icon routerLink="/menu/dashboard-beneficiary" routerDirection="root" class="ion-margin-end nav-icon"
+        name="home"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="customPage">
 
-  <div class="customContent ion-padding">  
+  <div class="customContent ion-padding">
     <br>
 
     <form [formGroup]="clinicalProfileForm" (ngSubmit)="clinicalProfileUpdate()">
@@ -22,25 +23,21 @@
         <ion-label color="dark" position="floating">Age of onset of disease <span class="danger">*</span>
         </ion-label>
         <ion-input type="text" formControlName="age_onset_disease" required></ion-input>
-      </ion-item>                  
-      <span 
-      class="errorMessage ion-text-wrap"  
-      *ngIf="formControlsClinical.age_onset_disease.invalid && (formControlsClinical.age_onset_disease.dirty || formControlsClinical.age_onset_disease.touched)"
-      >
+      </ion-item>
+      <span class="errorMessage ion-text-wrap"
+        *ngIf="formControlsClinical.age_onset_disease.invalid && (formControlsClinical.age_onset_disease.dirty || formControlsClinical.age_onset_disease.touched)">
         Enter a valid age
       </span>
 
       <br>
 
       <ion-item>
-        <ion-label color="dark" position="floating">Duration of illness <span class="danger">*</span> 
+        <ion-label color="dark" position="floating">Duration of illness <span class="danger">*</span>
         </ion-label>
         <ion-input type="text" formControlName="duration_illness" required></ion-input>
       </ion-item>
-      <span 
-      class="errorMessage ion-text-wrap"  
-      *ngIf="formControlsClinical.duration_illness.invalid && (formControlsClinical.duration_illness.dirty || formControlsClinical.duration_illness.touched)"
-      >
+      <span class="errorMessage ion-text-wrap"
+        *ngIf="formControlsClinical.duration_illness.invalid && (formControlsClinical.duration_illness.dirty || formControlsClinical.duration_illness.touched)">
         Enter a valid duration of illness
       </span>
 
@@ -49,12 +46,11 @@
       <ion-item>
         <ion-label color="dark" position="floating">Family history of Type 1 diabetes <span class="danger">*</span>
         </ion-label>
-        <ion-textarea rows="1" cols="1" autoGrow="true" formControlName="family_diabetes_history" required></ion-textarea>
-      </ion-item>            
-      <span 
-      class="errorMessage ion-text-wrap"  
-      *ngIf="formControlsClinical.family_diabetes_history.invalid && (formControlsClinical.family_diabetes_history.dirty || formControlsClinical.family_diabetes_history.touched)"
-      >
+        <ion-textarea rows="1" cols="1" autoGrow="true" formControlName="family_diabetes_history" required>
+        </ion-textarea>
+      </ion-item>
+      <span class="errorMessage ion-text-wrap"
+        *ngIf="formControlsClinical.family_diabetes_history.invalid && (formControlsClinical.family_diabetes_history.dirty || formControlsClinical.family_diabetes_history.touched)">
         Enter details of family, who has type 1 diabetes
       </span>
 
@@ -64,104 +60,91 @@
         <ion-label color="dark" position="floating">Associated co-morbidities <span class="danger">*</span>
         </ion-label>
         <ion-input type="text" formControlName="associated_co_morbidities" required></ion-input>
-      </ion-item>                  
-      <span 
-      class="errorMessage ion-text-wrap"  
-      *ngIf="formControlsClinical.associated_co_morbidities.invalid && (formControlsClinical.associated_co_morbidities.dirty || formControlsClinical.associated_co_morbidities.touched)"
-      >
+      </ion-item>
+      <span class="errorMessage ion-text-wrap"
+        *ngIf="formControlsClinical.associated_co_morbidities.invalid && (formControlsClinical.associated_co_morbidities.dirty || formControlsClinical.associated_co_morbidities.touched)">
         Enter details of additional conditons often co-occurring with a primary illness
       </span>
 
       <br>
 
       <ion-item>
-        <ion-label color="dark" position="floating">Current HbA1C <span class="danger">*</span>  
+        <ion-label color="dark" position="floating">Current HbA1C <span class="danger">*</span>
         </ion-label>
         <ion-input type="text" formControlName="current_hba" required></ion-input>
-      </ion-item>                
-      <span 
-      class="errorMessage ion-text-wrap"  
-      *ngIf="formControlsClinical.current_hba.invalid && (formControlsClinical.current_hba.dirty || formControlsClinical.current_hba.touched)"
-      >
+      </ion-item>
+      <span class="errorMessage ion-text-wrap"
+        *ngIf="formControlsClinical.current_hba.invalid && (formControlsClinical.current_hba.dirty || formControlsClinical.current_hba.touched)">
         Enter your current HbA1C
       </span>
 
       <br>
 
       <ion-item>
-        <ion-label color="dark" position="floating">Current insulin dose <span class="danger">*</span>  
+        <ion-label color="dark" position="floating">Current insulin dose <span class="danger">*</span>
         </ion-label>
         <ion-input type="text" formControlName="current_insulin_dose" required></ion-input>
-      </ion-item>          
-      <span 
-      class="errorMessage ion-text-wrap"  
-      *ngIf="formControlsClinical.current_insulin_dose.invalid && (formControlsClinical.current_insulin_dose.dirty || formControlsClinical.current_insulin_dose.touched)"
-      >
+      </ion-item>
+      <span class="errorMessage ion-text-wrap"
+        *ngIf="formControlsClinical.current_insulin_dose.invalid && (formControlsClinical.current_insulin_dose.dirty || formControlsClinical.current_insulin_dose.touched)">
         Enter your current insulin dose
       </span>
 
       <br>
 
       <ion-item>
-        <ion-label color="dark" position="floating">Hospitalization during study period <span class="danger">*</span>  
+        <ion-label color="dark" position="floating">Hospitalization during study period <span class="danger">*</span>
         </ion-label>
         <ion-input type="text" formControlName="study_period_hospitalization" required></ion-input>
-      </ion-item>          
-      <span 
-      class="errorMessage ion-text-wrap"  
-      *ngIf="formControlsClinical.study_period_hospitalization.invalid && (formControlsClinical.study_period_hospitalization.dirty || formControlsClinical.study_period_hospitalization.touched)"
-      >
+      </ion-item>
+      <span class="errorMessage ion-text-wrap"
+        *ngIf="formControlsClinical.study_period_hospitalization.invalid && (formControlsClinical.study_period_hospitalization.dirty || formControlsClinical.study_period_hospitalization.touched)">
         Enter the details of hospitalization during study period
       </span>
 
       <br>
 
       <ion-item>
-        <ion-label color="dark" position="floating">Reason for hospitalization <span class="danger">*</span> 
+        <ion-label color="dark" position="floating">Reason for hospitalization <span class="danger">*</span>
         </ion-label>
-        <ion-textarea rows="1" cols="1" autoGrow="true" formControlName="study_period_hospitalization_reason" required></ion-textarea>
-      </ion-item>           
-      <span 
-      class="errorMessage ion-text-wrap"  
-      *ngIf="formControlsClinical.study_period_hospitalization_reason.invalid && (formControlsClinical.study_period_hospitalization_reason.dirty || formControlsClinical.study_period_hospitalization_reason.touched)"
-      >
+        <ion-textarea rows="1" cols="1" autoGrow="true" formControlName="study_period_hospitalization_reason" required>
+        </ion-textarea>
+      </ion-item>
+      <span class="errorMessage ion-text-wrap"
+        *ngIf="formControlsClinical.study_period_hospitalization_reason.invalid && (formControlsClinical.study_period_hospitalization_reason.dirty || formControlsClinical.study_period_hospitalization_reason.touched)">
         Enter the reason of hospitalization during study period
       </span>
 
       <br>
 
       <ion-item>
-        <ion-label color="dark" position="floating">Ketone Test (Blood) <span class="danger">*</span> 
+        <ion-label color="dark" position="floating">Ketone Test (Blood) <span class="danger">*</span>
         </ion-label>
         <ion-input type="tel" formControlName="ketone_test_blood" required></ion-input>
-      </ion-item>           
-      <span 
-      class="errorMessage ion-text-wrap"  
-      *ngIf="formControlsClinical.ketone_test_blood.invalid && (formControlsClinical.ketone_test_blood.dirty || formControlsClinical.ketone_test_blood.touched)"
-      >
+      </ion-item>
+      <span class="errorMessage ion-text-wrap"
+        *ngIf="formControlsClinical.ketone_test_blood.invalid && (formControlsClinical.ketone_test_blood.dirty || formControlsClinical.ketone_test_blood.touched)">
         Enter the ketone blood test value
       </span>
 
       <br>
 
       <ion-item>
-        <ion-label color="dark" position="floating">Ketone Test (Urine) <span class="danger">*</span> 
+        <ion-label color="dark" position="floating">Ketone Test (Urine) <span class="danger">*</span>
         </ion-label>
         <ion-input type="tel" formControlName="ketone_test_urine" required></ion-input>
-      </ion-item>           
-      <span 
-      class="errorMessage ion-text-wrap"  
-      *ngIf="formControlsClinical.ketone_test_urine.invalid && (formControlsClinical.ketone_test_urine.dirty || formControlsClinical.ketone_test_urine.touched)"
-      >
-      Enter the ketone urine test value
+      </ion-item>
+      <span class="errorMessage ion-text-wrap"
+        *ngIf="formControlsClinical.ketone_test_urine.invalid && (formControlsClinical.ketone_test_urine.dirty || formControlsClinical.ketone_test_urine.touched)">
+        Enter the ketone urine test value
       </span>
 
       <br>
 
-      <ion-row center>  
-        <ion-col class="ion-text-center">   
-          <ion-button ion-button type="submit" [disabled]="!clinicalProfileForm.valid" >SUBMIT</ion-button>  
-        </ion-col> 
+      <ion-row center>
+        <ion-col class="ion-text-center">
+          <ion-button ion-button type="submit" [disabled]="!clinicalProfileForm.valid">SUBMIT</ion-button>
+        </ion-col>
       </ion-row>
 
     </form>
